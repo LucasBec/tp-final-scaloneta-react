@@ -12,7 +12,7 @@ export function Inicio(){
     useEffect(()=>{
         const tema = 'soccer messi';
         const apiKey = 'e08e9237c92a4a749bc489771a818b6d';
-        const consulta = `https://newsapi.org/v2/everything?q=${tema}&sortBy=publishedAt&pageSize=15&language=es&apiKey=${apiKey}`;
+        const consulta = `https://newsapi.org/v2/everything?q=${tema}&sortBy=publishedAt&pageSize=5&language=es&apiKey=${apiKey}`;
 
         fetch(consulta)
         .then( resp => {
