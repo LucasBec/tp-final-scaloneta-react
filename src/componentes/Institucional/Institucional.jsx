@@ -6,11 +6,9 @@ export function Institucional() {
 
                 <div className="row justify-content-center">
                     <div className="chiqui-tapia-inst">
-                        <img src="img/tapia-1.jpg"
-                            title="Asociación de Futbol Argentino"
-                            alt="Escudo AFA"
-                        />
-                    </div>
+                    <img src="img/tapia-1.jpg" alt="Tapia" className="img-fluid rounded"  style={{ borderRadius: '10%' }} title="Asociación de Futbol Argentino"/>
+                </div>
+                    
 
                     <div className="col-md-6">
                         <h2>Historia</h2>

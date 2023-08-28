@@ -10,17 +10,19 @@ import { BrowserRouter, Route, Link, Routes } from 'react-router-dom'
 import { Contactos } from '../Contactos/Contactos';
 import { Institucional } from '../Institucional/Institucional';
 import { Inicio} from '../Inicio/Inicio';
+import './Header.css';
 
 export function Header() {
-    return (
-      <BrowserRouter>
+  return (
+    <BrowserRouter>
       <>
-        <Navbar collapseOnSelect expand='lg' bg="primary" data-bs-theme="dark">
+        <Navbar collapseOnSelect expand='lg' className='custom-navbar '>
           <Container>
-            <Navbar.Brand href="/">Inicio</Navbar.Brand>
-            <Navbar.Toggle aria-controls='algo'/>
+           
+            <Navbar.Toggle aria-controls='algo' />
             <Navbar.Collapse id='algo'>
-              <Nav className="me-auto">            
+              <Nav className='me-auto'>
+                <Navbar.Brand href="/">Inicio</Navbar.Brand>
                 <Nav.Link as={Link} to='/institucional'>Institucional</Nav.Link>
                 <Nav.Link as={Link} to='/contactos'>Contactos</Nav.Link>
               </Nav>
@@ -30,12 +32,11 @@ export function Header() {
       </>
       <div>
         <Routes>
-          <Route path='/' element={<Inicio/>}/>
-          <Route path='/institucional' element={<Institucional/>}/>
-          <Route path='/contactos' element={<Contactos/>}/>
+          <Route path='/' element={<Inicio />} />
+          <Route path='/institucional' element={<Institucional />} />
+          <Route path='/contactos' element={<Contactos />} />
         </Routes>
       </div>
-      </BrowserRouter>
-    );
-  }
-
+    </BrowserRouter>
+  );
+}
