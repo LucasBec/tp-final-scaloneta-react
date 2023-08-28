@@ -1,6 +1,6 @@
-/* Estilos para  las cards */
-.card {
-    background-color: rgba(165, 165, 165, 0.316);
+/* Estilos para  las cards noticias y contactos */
+.card:first-child {
+    background-color: rgba(150, 141, 158, 0.832);
     margin-bottom: 3.5rem;
 }
 

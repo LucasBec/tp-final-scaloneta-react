@@ -37,11 +37,10 @@
     height: 100%;
   }
   
-  .h1-shadow {
-    text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.8); /* Sombra dorada */
-  }
+
   
   .p-index-html {
+    color: rgb(210, 210, 210);
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -52,6 +51,9 @@
     margin-right: 20%;
     margin-top: 10vh;
     line-height: 1.4;
-    text-shadow: 0 0 22px #ffd9007d;
   }
   
+.h2-noticias {
+  margin-top: 10vh;
+  color: rgb(210, 210, 210);
+}

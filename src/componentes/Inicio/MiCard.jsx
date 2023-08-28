@@ -7,8 +7,8 @@ export function MiCard(props) {
     const { articulo } = props;
 
     return (
-        <div className='container d-flex justify-content-center align-items-center mt-5'>
-            <Card style={{ width: '30rem' }}>
+        <div className='card-container d-flex justify-content-center align-items-center mt-5'>
+            <Card style={{ width: '30rem'}}>
                 <Card.Img variant="top" src={articulo.urlToImage} />
                 <Card.Body>
                     <Card.Title>{articulo.title}</Card.Title>

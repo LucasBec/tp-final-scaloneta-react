@@ -10,6 +10,7 @@ import { Row, Col, Container } from "react-bootstrap"; // Solo importa los compo
 import "./Inicio.css"; // Importa tu archivo de estilos CSS personalizados si lo tienes
 
 export function Inicio() {
+
   const [datos, setDatos] = useState(null);
 
   useEffect(() => {
@@ -51,6 +52,8 @@ export function Inicio() {
           </Col>
         </Row>
       </Container>
+
+      <h2 className="h2-noticias">Últimas Noticias</h2>
 
       <div>
         {datos ? (
