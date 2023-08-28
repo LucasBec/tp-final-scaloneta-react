@@ -26,14 +26,15 @@ export function Contactos (){
                                 <Form.Group className="mb-3" controlId="formBasicNombre">
                                     <Form.Label>Nombre y Apellido</Form.Label>
                                     <Form.Control type="text" onChange={(e) => setFormulario({ ...formulario, nombre:e.target.value })}/>
-                                    <Form.Text className="text-muted">
-                                        No compartiremos tu correo.
-                                    </Form.Text>
+
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formBasicCorreo">
                                     <Form.Label>Correo Electrónico</Form.Label>
                                     <Form.Control type="email" onChange={(e) => setFormulario({ ...formulario, correo: e.target.value})}/>
+                                    <Form.Text className="text-muted">
+                                        No compartiremos tu correo con nadie.
+                                    </Form.Text>
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formBasicMensaje">

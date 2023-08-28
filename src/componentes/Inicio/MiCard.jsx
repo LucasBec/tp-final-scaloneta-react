@@ -14,7 +14,7 @@ export function MiCard(props) {
                     <Card.Title>{articulo.title}</Card.Title>
                     <Card.Text>{articulo.description}</Card.Text>
                     <Button variant='primary' as='a' href={articulo.url} target='_blank'>
-                        Ver Nota
+                        Ver Más
                     </Button>
                 </Card.Body>
             </Card>

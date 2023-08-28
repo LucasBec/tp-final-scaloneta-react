@@ -17,7 +17,7 @@ export function Header() {
       <>
         <Navbar collapseOnSelect expand='lg' bg="primary" data-bs-theme="dark">
           <Container>
-            <Navbar.Brand href="/">PROG3</Navbar.Brand>
+            <Navbar.Brand href="/">Inicio</Navbar.Brand>
             <Navbar.Toggle aria-controls='algo'/>
             <Navbar.Collapse id='algo'>
               <Nav className="me-auto">            

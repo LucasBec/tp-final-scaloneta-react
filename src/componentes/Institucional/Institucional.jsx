@@ -1,32 +1,46 @@
 
-export function Institucional(){
+export function Institucional() {
     return (
-        <>
+            <>
             <div className="container mt-5">
+
                 <div className="row justify-content-center">
-                    <div className="col-md-6">
-                        <h3>Valores</h3>
-                        <h5>Calidad académica</h5>
-                        <p>
-                            Búsqueda permanente de un elevado nivel académico científico y compromiso con la generación de nuevos conocimientos y su transferencia.
-                        </p>
-                        <h5>Honestidad y transparencia</h5>
-                        <p>
-                            La institución promueve la honestidad en el desempeño de todos sus miembros y la transparencia en la gestión.
-                        </p>
-                        <h5>Respeto</h5>
-                        <p>
-                            La institución promueve el respeto por los derechos y la dignidad de las personas y por el ambiente.
-                        </p>
-                    </div>
-                    <div className="col-md-6">
-                        <img src="img/logo-fcad.png" 
-                            title="Facultad de Ciencias de la Administración"
-                            alt="Logo UNER-FCAD" 
+                    <div className="chiqui-tapia-inst">
+                        <img src="img/tapia-1.jpg"
+                            title="Asociación de Futbol Argentino"
+                            alt="Escudo AFA"
                         />
+                    </div>
+
+                    <div className="col-md-6">
+                        <h2>Historia</h2>
+                        <p>La Asociación del Fútbol Argentino (AFA) es la entidad encargada de regular y organizar el fútbol en Argentina. Fue fundada el 21 de febrero de 1893, convirtiéndose en la quinta federación de fútbol en el mundo.
+                            <br/><br/>
+                            La historia de la AFA está estrechamente relacionada con la historia del fútbol en Argentina, que se remonta al final del siglo XIX, cuando los inmigrantes europeos introdujeron el deporte en el país. La primera asociación de fútbol en Argentina fue fundada en 1891, y dos años después se creó la Asociación del Fútbol Argentino.
+                            <br/><br/>
+                            Durante sus primeros años, la AFA se dedicó principalmente a organizar torneos regionales, pero con el tiempo se convirtió en una organización nacional. En la década de 1930, la AFA creó la Primera División, que se convirtió en la liga de fútbol más importante de Argentina.
+                            <br/><br/>
+                            La AFA también ha tenido un papel destacado en la organización de eventos internacionales de fútbol en Argentina. En 1978, el país organizó la Copa Mundial de la FIFA, que fue ganada por Argentina. La AFA también ha sido anfitriona de la Copa América en varias ocasiones.
+                            <br/><br/>
+                            Hoy en día, la AFA sigue siendo una organización vital para el fútbol en Argentina. Es responsable de organizar la liga profesional de fútbol, así como los equipos nacionales de fútbol masculino y femenino. La AFA trabaja incansablemente para mejorar el deporte en Argentina y promover el fútbol como un importante símbolo cultural del país.</p>
+                            <br/><br/><br/>
+
+                            <h2>Visión</h2>
+                            <p>La visión de la Asociación del Fútbol Argentino es convertirse en una organización de referencia en el fútbol mundial, promoviendo los valores del deporte y trabajando en pos del desarrollo y crecimiento del fútbol en Argentina y en el mundo.</p>
+                            <br/>
+
+                            <h2>Misión</h2>
+                            <p>La misión de la Asociación del Fútbol Argentino es liderar y fomentar el desarrollo del fútbol en Argentina, promoviendo la excelencia deportiva, la integridad y el fair play en todas sus actividades. Buscamos mejorar continuamente el deporte y fortalecer
+                                la relación entre el fútbol y la sociedad, mediante la formación de jugadores y técnicos, la organización de competencias de alta calidad y el impulso de iniciativas sociales y comunitarias que promuevan la inclusión y el desarrollo humano.</p>
+                                <div className="escudo-afa-inst">
+                                    <img src="img/afa.png"
+                                        title="Asociación de Futbol Argentino"
+                                        alt="Escudo AFA"
+                                    />
+                                </div>
                     </div>
                 </div>
             </div>
-        </>
+            </>
     )
 }
