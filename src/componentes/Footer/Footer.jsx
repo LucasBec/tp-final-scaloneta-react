@@ -30,7 +30,7 @@ export function Footer() {
             </a>
           </li>
         </ul>
-        <span className="mb-3 text-body-secondary copy-text">&copy; 2023 AFA</span>
+        <span className="mb-3 text-body-secondary copy-text">&copy; 2023 AFA | Beceiro Lucas - Segal David</span>
       </Container>
     </footer>
   );

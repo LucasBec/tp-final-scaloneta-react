@@ -14,7 +14,6 @@
 .me-auto .nav-link {
   font-size: 22px;
   margin: 10px;
-
 }
 .nav-link::after {
   content: "";
