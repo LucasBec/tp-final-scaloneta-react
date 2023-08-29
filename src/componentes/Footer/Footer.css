@@ -1,20 +1,23 @@
+/* Footer.css */
 .footer-container {
-    margin-top: 8.5%;
-    background-color: gold;
-    padding: 20px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 10vh; 
-  }
-  
-  .social-icons {
-    list-style: none;
-    display: flex;
-    gap: 10px;
-  }
-  
-  .social-icons a {
-    color: #333;
-    text-decoration: none;
-  }
+  margin-top: 8.5%;
+  background-color: gold;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh; 
+}
+
+.social-icons svg {
+  width: 3vh;
+  height: 3vh; 
+  margin-right: 10px;
+  margin-top: 30%;
+}
+
+.copy-text {
+ font-size: larger;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ margin-top: 1vh;
+}
