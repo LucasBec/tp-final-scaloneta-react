@@ -18,13 +18,16 @@ export function Header() {
       <>
         <Navbar collapseOnSelect expand='lg' className='custom-navbar '>
           <Container>
+{/*           <a class="navbar-brand" href="/">
+						<img src="/img/afa_logo_negro.png" alt="Logo AFA" style={{height: '50px', width: '40px;'}}/>
+					</a> */}
            
             <Navbar.Toggle aria-controls='algo' />
             <Navbar.Collapse id='algo'>
               <Nav className='me-auto'>
-                <Navbar.Brand href="/">Inicio</Navbar.Brand>
-                <Nav.Link as={Link} to='/institucional'>Institucional</Nav.Link>
-                <Nav.Link as={Link} to='/contactos'>Contactos</Nav.Link>
+                <Navbar.Brand href="/"><img src="/img/afa_logo_negro.png" alt="Logo AFA" style={{height: '60px', width: '60px;'}}/></Navbar.Brand>
+                <Nav.Link as={Link} to='/institucional' >Institucional</Nav.Link>
+                <Nav.Link as={Link} to='/contactos' >Contactos</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
