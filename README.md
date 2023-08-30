@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Proyecto TP Final AFA
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Integrantes
 
-## Available Scripts
+- Beceiro Lucas
+- Segal David
 
-In the project directory, you can run:
+## Repositorio en GitHub
 
-### `npm start`
+[https://github.com/LucasBec/tp-final-scaloneta-react](https://github.com/LucasBec/tp-final-scaloneta-react)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Descripción del Proyecto
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Este proyecto es el Trabajo Práctico Final desarrollado para el curso, con el objetivo de demostrar las habilidades y conocimientos adquiridos. Está basado en la Asociación del Fútbol Argentino (AFA) y presenta una interfaz que proporciona información sobre la organización, noticias relacionadas con el fútbol argentino y más.
 
-### `npm test`
+## Librerías Utilizadas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `react-spring`: Se utiliza para agregar animaciones fluidas y atractivas a los elementos de la interfaz de usuario.
+- `react-intersection-observer`: Esta librería se utiliza para detectar cuándo los elementos de la página están dentro del campo visual del usuario.
 
-### `npm run build`
+## Características del Proyecto
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Interfaz de usuario diseñada para ofrecer información clara y accesible sobre la Asociación del Fútbol Argentino (AFA).
+- Integración de noticias relacionadas con el fútbol argentino para mantener a los usuarios informados.
+- Uso de animaciones modernas y fluidas para mejorar la experiencia del usuario, gracias a `react-spring`.
+- Detección de elementos visibles en pantalla para activar animaciones utilizando `react-intersection-observer`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Instrucciones para Instalar y Ejecutar el Proyecto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clona el repositorio desde GitHub, navega al directorio del proyecto e instala las dependencias utilizando los siguientes comandos:
+   
+   ```shell
+   git clone https://github.com/LucasBec/tp-final-scaloneta-react.git
+   cd tp-final-scaloneta-react
+   npm install
 
-### `npm run eject`
+## Inicia la aplicación con el siguiente comando:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- npm start
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Abre tu navegador y accede a http://localhost:3000 para explorar el proyecto TP Final AFA.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Agradecimientos
+- Agradecemos por el interés en nuestro proyecto TP Final AFA. Esperamos que encuentres valiosa la información proporcionada y que disfrutes de la experiencia que hemos creado.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
