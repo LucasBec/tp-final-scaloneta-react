@@ -1,0 +1,17 @@
+
+
+.afa-youtube {
+    display: inline-block;
+    transform-style: preserve-3d; 
+    transition: transform 1.5s; 
+    transform: rotateY(360deg);
+    height: 42vh;
+    width: 64%;
+    padding-right: 3%;
+}
+
+.afa-youtube:hover {
+    transform: rotateY(720deg);
+
+}
+
