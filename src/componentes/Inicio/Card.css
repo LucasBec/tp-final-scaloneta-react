@@ -4,3 +4,42 @@
     margin-bottom: 3.5rem;
 }
 
+/* Estilos generales del botón */
+.ver-mas-button {
+    position: relative;
+    overflow: hidden; /* Para contener el efecto de borde */
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Borde con difuminación */
+  .ver-mas-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(255, 255, 0, 0.3); /* Borde amarillo con difuminación */
+    filter: blur(10px); /* Difuminación del borde */
+    opacity: 0.5; /* Opacidad del borde */
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  /* Brillo sutil */
+  .ver-mas-button::after {
+    content: "";
+    position: absolute;
+    top: -50%; /* Ajusta la posición vertical del brillo */
+    left: -50%; /* Ajusta la posición horizontal del brillo */
+    width: 200%; /* Ajusta el tamaño del brillo */
+    height: 200%; /* Ajusta el tamaño del brillo */
+    background-color: rgba(255, 255, 0, 0.3); /* Brillo amarillo */
+    opacity: 0; /* Inicia sin brillo */
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  /* Estilos al pasar el mouse por encima */
+  .ver-mas-button:hover {
+    transform: scale(1.1);
+  }
+  
