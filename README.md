@@ -32,11 +32,11 @@ Este proyecto es el Trabajo Práctico Final desarrollado para el curso, con el o
    ```shell
    git clone https://github.com/LucasBec/tp-final-scaloneta-react.git
    cd tp-final-scaloneta-react
-   npm install
+   npm install 
 
 ## Inicia la aplicación con el siguiente comando:
 
-- npm start
+    ```npm start```
 
 - Abre tu navegador y accede a http://localhost:3000 para explorar el proyecto TP Final AFA.
 
