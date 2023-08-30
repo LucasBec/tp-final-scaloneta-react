@@ -36,7 +36,7 @@ Este proyecto es el Trabajo Práctico Final desarrollado para el curso, con el o
 
 ## Inicia la aplicación con el siguiente comando:
 
-    `npm start
+    npm start
 
 - Abre tu navegador y accede a http://localhost:3000 para explorar el proyecto TP Final AFA.
 
