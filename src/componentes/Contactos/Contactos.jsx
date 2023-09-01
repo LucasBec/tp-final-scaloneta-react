@@ -4,6 +4,8 @@ import { useState } from "react";
 //clases bootstrap
 import { Form, Button, Card, Table} from "react-bootstrap" ;
 
+import "./Contactos.css"
+
 export function Contactos (){
 
     // objeto para almacenar la información del formulario
@@ -25,13 +27,13 @@ export function Contactos (){
                             <Form onSubmit={enviarInformacion}>
                                 <Form.Group className="mb-3" controlId="formBasicNombre">
                                     <Form.Label>Nombre y Apellido</Form.Label>
-                                    <Form.Control type="text" onChange={(e) => setFormulario({ ...formulario, nombre:e.target.value })}/>
+                                    <Form.Control className="formInput" type="text" onChange={(e) => setFormulario({ ...formulario, nombre:e.target.value })}/>
 
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formBasicCorreo">
                                     <Form.Label>Correo Electrónico</Form.Label>
-                                    <Form.Control type="email" onChange={(e) => setFormulario({ ...formulario, correo: e.target.value})}/>
+                                    <Form.Control className="formInput" type="email" onChange={(e) => setFormulario({ ...formulario, correo: e.target.value})}/>
                                     <Form.Text className="text-muted">
                                         No compartiremos tu correo con nadie.
                                     </Form.Text>
@@ -39,7 +41,7 @@ export function Contactos (){
 
                                 <Form.Group className="mb-3" controlId="formBasicMensaje">
                                     <Form.Label>Mensaje</Form.Label>
-                                    <Form.Control as="textarea" rows={5} onChange={(e) => setFormulario({ ...formulario, mensaje: e.target.value})}/>
+                                    <Form.Control className="formInput" as="textarea" rows={5} onChange={(e) => setFormulario({ ...formulario, mensaje: e.target.value})}/>
                                 </Form.Group>
 
                                 <Button variant="primary" type="submit">
@@ -54,7 +56,7 @@ export function Contactos (){
                     <Card>
                         <Card.Body>
                             <Card.Title>Información Útil</Card.Title>
-                            <Table striped bordered hover>
+                            <Table id="infoTable" striped bordered hover>
                                 <thead>
                                     <tr>
                                     <th>Departamento</th>

@@ -1,4 +1,4 @@
-# Proyecto TP Final AFA
+# Proyecto TP Final Scaloneta
 
 ## Integrantes
 
@@ -11,7 +11,7 @@
 
 ## Descripción del Proyecto
 
-Este proyecto es el Trabajo Práctico Final desarrollado para el curso, con el objetivo de demostrar las habilidades y conocimientos adquiridos. Está basado en la Asociación del Fútbol Argentino (AFA) y presenta una interfaz que proporciona información sobre la organización, noticias relacionadas con el fútbol argentino y más.
+Este proyecto es el Trabajo Práctico Final desarrollado para el curso PROGIII, con el objetivo de demostrar las habilidades y conocimientos adquiridos. Está basado en la Asociación del Fútbol Argentino (AFA) y presenta una interfaz que proporciona información sobre la organización, jugadores, noticias relacionadas con el fútbol argentino y más.
 
 ## Librerías Utilizadas
 
@@ -41,7 +41,7 @@ Este proyecto es el Trabajo Práctico Final desarrollado para el curso, con el o
 - Abre tu navegador y accede a http://localhost:3000 para explorar el proyecto TP Final AFA.
 
 ## Agradecimientos
-- Agradecemos por el interés en nuestro proyecto TP Final AFA. Esperamos que encuentres valiosa la información proporcionada y que disfrutes de la experiencia que hemos creado.
+- Agradecemos por el interés en nuestro proyecto TP Final Scaloneta. Esperamos que encuentres valiosa la información proporcionada y que disfrutes de la experiencia que hemos creado.
 
 
 

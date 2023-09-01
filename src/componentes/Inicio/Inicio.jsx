@@ -5,9 +5,11 @@ import "./Inicio.css";
 import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap';
 
 //  rutas completas de las imágenes en la carpeta actual
-const imagenHome1 = require('./imagen-home1.jpg');
-const argentinaCampeon = require('./argentina-campeon-mundial-2022.jpg');
-const argentinaLevantandoLaCopa = require('./argentina levantando la copa.jpg');
+const imagenHome1 = require('./img carousel/imagen-home1.jpg');
+const argentinaCampeon = require('./img carousel/argentina-campeon-mundial-2022.jpg');
+const argentinaLevantandoLaCopa = require('./img carousel/argentina levantando la copa.jpg');
+const tapia = require('./img carousel/tapia-1.jpg');
+
 
 const items = [
   {
@@ -24,6 +26,11 @@ const items = [
     src: argentinaLevantandoLaCopa,
     altText: 'Slide 3',
     caption: 'Slide 3'
+  },
+  {
+    src: tapia,
+    altText: 'Slide 4',
+    caption: 'Slide 4'
   }
 ];
 
