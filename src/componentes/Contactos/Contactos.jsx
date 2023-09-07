@@ -1,5 +1,6 @@
 //hook de react
 import { useState } from "react";
+import axios from "axios";
 
 //clases bootstrap
 import { Form, Button, Card, Table} from "react-bootstrap" ;
@@ -7,12 +8,30 @@ import { Form, Button, Card, Table} from "react-bootstrap" ;
 import "./Contactos.css"
 
 export function Contactos (){
+    const baseURL = 'http://localhost:3005/contacto';
 
     // objeto para almacenar la información del formulario
     const [formulario, setFormulario] = useState({nombre:'', correo:'', mensaje:''});
 
-    function enviarInformacion(){
-        alert(JSON.stringify(formulario));
+    
+    // function enviarInformacion(){
+    //     alert(JSON.stringify(formulario));        
+    // }   
+
+    const enviarInformacion = async(e)=>{
+        e.preventDefault();
+
+		// argumentos: direccion del servidor, datos enviados al servidor
+        axios.post(baseURL,formulario)
+        .then( res => {
+            console.log(res);
+            alert(res.data.respuesta);
+            setFormulario({nombre:'', correo:'', mensaje:''});
+        })
+        .catch( error=> {
+            console.log('error ', error);
+        });
+
     }
 
     return(
@@ -20,28 +39,31 @@ export function Contactos (){
             <div className="container mt-5">
                 <div className="row">
                     <div className="col-md-6">
-                        <Card>
+                    <Card>
                         <Card.Body>
                             <Card.Title>Envianos tu consulta</Card.Title>
                             
-                            <Form onSubmit={enviarInformacion}>
+                            <Form onSubmit={e => enviarInformacion(e)}>
                                 <Form.Group className="mb-3" controlId="formBasicNombre">
                                     <Form.Label>Nombre y Apellido</Form.Label>
-                                    <Form.Control className="formInput" type="text" onChange={(e) => setFormulario({ ...formulario, nombre:e.target.value })}/>
+                                    <Form.Control type="text" onChange={(e) => setFormulario({ ...formulario, nombre:e.target.value })}
+                                        value={formulario.nombre} required/>
 
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formBasicCorreo">
                                     <Form.Label>Correo Electrónico</Form.Label>
-                                    <Form.Control className="formInput" type="email" onChange={(e) => setFormulario({ ...formulario, correo: e.target.value})}/>
+                                    <Form.Control type="email" onChange={(e) => setFormulario({ ...formulario, correo: e.target.value})}
+                                        value={formulario.correo} required/>
                                     <Form.Text className="text-muted">
-                                        No compartiremos tu correo con nadie.
+                                        No compartiremos tu correo.
                                     </Form.Text>
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formBasicMensaje">
                                     <Form.Label>Mensaje</Form.Label>
-                                    <Form.Control className="formInput" as="textarea" rows={5} onChange={(e) => setFormulario({ ...formulario, mensaje: e.target.value})}/>
+                                    <Form.Control as="textarea" rows={5} onChange={(e) => setFormulario({ ...formulario, mensaje: e.target.value})}
+                                        value={formulario.mensaje} required/>
                                 </Form.Group>
 
                                 <Button variant="primary" type="submit">
