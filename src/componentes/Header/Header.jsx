@@ -12,7 +12,7 @@ import { Institucional } from '../Institucional/Institucional';
 import { Inicio} from '../Inicio/Inicio';
 import { Jugadores} from '../Jugadores/Jugadores';
 import { Convocatorias} from '../Convocatorias/Convocatorias';
-import { Equipo_Inicial } from '../EquipoInicial/equipoInicial';
+import { EquipoInicial } from '../EquipoInicial/equipoInicial';
 import './Header.css';
 
 export function Header() {
@@ -24,7 +24,7 @@ export function Header() {
 {/*           <a class="navbar-brand" href="/">
 						<img src="/img/afa_logo_negro.png" alt="Logo AFA" style={{height: '50px', width: '40px;'}}/>
 					</a> */}
-            <Navbar.Brand href="/"><img src="/img/afa_logo_negro.png" alt="Logo AFA" style={{height: '60px', width: '60px;'}}/></Navbar.Brand>
+            <Navbar.Brand href="/"><img src="/img/afa_logo_negro.png" alt="Logo AFA" style={{height: '60px', width: '60px'}}/></Navbar.Brand>
             <Navbar.Toggle aria-controls='algo' />
             <Navbar.Collapse id='algo'>
               <Nav className='me-auto'>
@@ -46,7 +46,7 @@ export function Header() {
           <Route path='/contactos' element={<Contactos />} />
           <Route path='/Jugadores' element={<Jugadores />} />
           <Route path='/Convocatorias' element={<Convocatorias />} />
-          <Route path='/EquipoInicial' element={<Equipo_Inicial />} />
+          <Route path='/EquipoInicial' element={<EquipoInicial />} />
         </Routes>
       </div>
     </BrowserRouter>

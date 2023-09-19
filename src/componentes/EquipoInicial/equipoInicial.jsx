@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./equipoInicial.css";
 
-export function Equipo_Inicial() {
+export function EquipoInicial() {
     return (
             <>
             <div className="container">
