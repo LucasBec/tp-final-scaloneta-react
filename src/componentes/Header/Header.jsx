@@ -24,11 +24,11 @@ export function Header() {
 {/*           <a class="navbar-brand" href="/">
 						<img src="/img/afa_logo_negro.png" alt="Logo AFA" style={{height: '50px', width: '40px;'}}/>
 					</a> */}
-           
+            <Navbar.Brand href="/"><img src="/img/afa_logo_negro.png" alt="Logo AFA" style={{height: '60px', width: '60px;'}}/></Navbar.Brand>
             <Navbar.Toggle aria-controls='algo' />
             <Navbar.Collapse id='algo'>
               <Nav className='me-auto'>
-                <Navbar.Brand href="/"><img src="/img/afa_logo_negro.png" alt="Logo AFA" style={{height: '60px', width: '60px;'}}/></Navbar.Brand>
+
                 <Nav.Link as={Link} to='/Jugadores' >Jugadores</Nav.Link>
                 <Nav.Link as={Link} to='/Convocatorias' >Convocatorias</Nav.Link>
                 <Nav.Link as={Link} to='/EquipoInicial' >Equipo Inicial</Nav.Link>
