@@ -8,14 +8,14 @@ import { Form, Button, Card, Table} from "react-bootstrap" ;
 import "./Contactos.css"
 
 export function Contactos (){
-    const baseURL = 'http://localhost:3005/contacto';
+    const baseURL = 'http://localhost:3005/api/v1/publico/contacto';
 
     // objeto para almacenar la información del formulario
     const [formulario, setFormulario] = useState({nombre:'', correo:'', mensaje:''});
 
     
     // function enviarInformacion(){
-    //     alert(JSON.stringify(formulario));        
+    //     alert(JSON.stringify(formulario));
     // }   
 
     const enviarInformacion = async(e)=>{
