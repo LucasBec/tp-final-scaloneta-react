@@ -10,7 +10,7 @@ import { BrowserRouter, Route, Link, Routes } from 'react-router-dom'
 import { Contactos } from '../Contactos/Contactos';
 import { Institucional } from '../Institucional/Institucional';
 import { Inicio} from '../Inicio/Inicio';
-import { Jugadores} from '../Jugadores/Jugadores';
+import { Crud} from '../Jugadores/Jugadores';
 import { Convocatorias} from '../Convocatorias/Convocatorias';
 import { EquipoInicial } from '../EquipoInicial/equipoInicial';
 import './Header.css';
@@ -44,7 +44,7 @@ export function Header() {
           <Route path='/' element={<Inicio />} />
           <Route path='/institucional' element={<Institucional />} />
           <Route path='/contactos' element={<Contactos />} />
-          <Route path='/Jugadores' element={<Jugadores />} />
+          <Route path='/Jugadores' element={<Crud />} />
           <Route path='/Convocatorias' element={<Convocatorias />} />
           <Route path='/EquipoInicial' element={<EquipoInicial />} />
         </Routes>
