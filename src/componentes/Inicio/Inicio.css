@@ -1,59 +1,77 @@
+.titulo-inicio {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 36px;
+  font-weight: bold;
+  color: #bcbcbc;
+  padding: 20px;
+  margin: 0;
+  background: linear-gradient(to right, #220022, #a701a7, #220022);
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .parallax-container {
     position: relative;
     overflow: hidden;
     width: 100%;
     height: 70vh;
+    margin-bottom: 10px;
   }
   
-  .parallax-image {
-    width: 100%;
-    height: 150%;
-    position: relative;
-    z-index: 1;
-    transition: transform 10.5s ease-out;
-    filter: brightness(0.5);
-    background: linear-gradient(to right, #000000, transparent);
-    filter: drop-shadow(10 10 10 10);
-  }
+.parallax-image {
+  width: 100%;
+  height: 150%;
+  position: relative;
+  z-index: 1;
+  transition: transform 10.5s ease-out;
+  filter: brightness(0.5);
+  background: linear-gradient(to right, #000000, transparent);
+  filter: drop-shadow(10 10 10 10);
+}
   
-  .parallax-image:hover {
+/*   .parallax-image:hover { //efecto zoom
     transform: scale(2.1);
-  }
+  } */
   
-  .parallax-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 70%;
-    height: 100%;
-  }
-  
-  .parallax-overlay::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 60%;
-    height: 100%;
-  }
-  
+.parallax-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 100%;
+}
 
+.parallax-overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+}
   
-  .p-index-html {
-    color: rgb(210, 210, 210);
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: space-between;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 1.7rem;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 10vh;
-    line-height: 1.4;
-  }
+.divider {
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 3%;
+	margin-bottom: 3%;
+
+}
+  
+.p-index-html {
+  color: rgb(210, 210, 210);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-between;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.7rem;
+  margin-top: 20px;
+  line-height: 1.4;
+}
   
 .h2-noticias {
   margin-top: 10vh;
   color: rgb(210, 210, 210);
 }
+

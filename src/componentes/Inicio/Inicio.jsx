@@ -55,15 +55,19 @@ const Inicio = () => {
 
   return (
     <>
+      <h1 className="titulo-inicio">APP Scaloneta</h1>
+
       <CarouselInicio />
+
+      <div class="divider"></div>
 
       <Container className="p-index-html">
         <Row>
           <Col>
             <p>
               ¡Bienvenidos a la nueva aplicación de la AFA! En este espacio podrás encontrar todo lo relacionado con la Selección Argentina de fútbol y su cuerpo técnico.
-              Te invitamos a conocer nuestra nueva aplicación Web, desarrollada en colaboración con expertos en tecnología. Esta herramienta única en su tipo permitirá al cuerpo técnico de la Selección Argentina llevar a cabo de manera eficiente la convocatoria de jugadores y la creación del 11 inicial para cada partido.
-              Además, en nuestro sitio encontrarás toda la información actualizada sobre los jugadores, los próximos partidos y el desempeño de la Selección en cada torneo. También podrás acceder a las últimas noticias y novedades del mundo del fútbol argentino.
+              Te invitamos a conocer nuestra nueva aplicación Web, esta herramienta permitirá al cuerpo técnico de la Selección Argentina llevar a cabo de manera eficiente la convocatoria de jugadores y la creación del 11 inicial para cada partido.
+              Además, encontrarás toda la información actualizada sobre los jugadores, los próximos partidos y el desempeño de la Selección en cada torneo.
               ¡Únete a nuestra comunidad y no te pierdas ningún detalle de la Selección Argentina!
             </p>
           </Col>
@@ -130,6 +134,8 @@ class CarouselInicio extends React.Component {
 
     const slides = items.map((item) => {
       return (
+
+        
         <CarouselItem
           onExiting={this.onExiting}
           onExited={this.onExited}

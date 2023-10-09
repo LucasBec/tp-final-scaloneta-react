@@ -23,11 +23,11 @@
 	box-shadow: 0 0 10px rgba(136, 77, 255, 0.5);
 	margin: 20px auto;
 	max-width: 400px;
-	transition: transform 0.5s ease-out;
+	transition: transform 0.2s ease-out;
 }
 
 #caja-convocatoria:hover {
-	transform: scale(1.05);
+	transform: scale(1.02);
 }
 
 
@@ -46,6 +46,11 @@
 	box-shadow: 0 0 10px rgba(136, 77, 255, 0.5);
 	margin: 20px auto;
 	max-width: 400px;
+  transition: transform 0.2s ease-out;
+}
+
+.container-filtro-fechas:hover {
+	transform: scale(1.02);
 }
 
 /* CONVOCAR */
