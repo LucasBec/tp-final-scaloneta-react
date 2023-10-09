@@ -5,6 +5,7 @@ import axios from "axios";
 //clases bootstrap
 import { Form, Button, Card, Table} from "react-bootstrap" ;
 
+// importar css
 import "./Contactos.css"
 
 export function Contactos (){

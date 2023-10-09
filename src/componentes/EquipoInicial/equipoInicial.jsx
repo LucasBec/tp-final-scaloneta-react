@@ -6,7 +6,7 @@ export function EquipoInicial() {
             <>
             <div className="container">
                 <h2>Equipo Inicial</h2>
-
+        
             </div>
             </>
     )

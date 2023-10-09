@@ -49,6 +49,7 @@ const Inicio = () => {
       })
       .catch(error => {
         console.log('error -->', error);
+        
       });
   }, []);
 
