@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import "./equipoInicial.css";
 
 export function EquipoInicial() {
@@ -11,3 +11,4 @@ export function EquipoInicial() {
             </>
     )
 }
+
