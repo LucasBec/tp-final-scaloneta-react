@@ -1,0 +1,33 @@
+/* Estilos para el encabezado de la tabla */
+.miThead {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    font-weight: 600;
+    background: linear-gradient(to left, #690069, #8b008b, #690069) !important;
+    color: rgb(255, 255, 255) !important;
+    border-color: #690069;
+    border-top: solid #690069 1px !important;
+    border-bottom: solid #690069 1px !important;
+    z-index: 1; /* Para que esté por encima del contenido de la tabla */
+}
+
+.miTabla{
+    max-height: 600px; 
+    overflow-y: auto; 
+    
+}
+
+.miBoton{
+    margin-right: 5px;
+    margin-bottom: 8px;
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+    
+    
+}
+
