@@ -88,7 +88,7 @@ export function Crud() {
                                 <div className="col-md-4">
                                     <Form.Group className="mb-3" controlId="formBasicdni">
                                         <Form.Label>DNI</Form.Label>
-                                        <Form.Control type="text"
+                                        <Form.Control type="text" autoComplete='off'
                                             onChange={(e) => setFormulario({ ...formulario, dni:e.target.value })}
                                             value={formulario.dni} required/>
                                     </Form.Group>
@@ -96,7 +96,7 @@ export function Crud() {
                                 <div className="col-md-4">
                                     <Form.Group className="mb-3" controlId="formBasicNombre">
                                         <Form.Label>Nombre</Form.Label>
-                                        <Form.Control type="text"
+                                        <Form.Control type="text" autoComplete='off'
                                             onChange={(e) => setFormulario({ ...formulario, nombre:e.target.value })}
                                             value={formulario.nombre} required/>
                                     </Form.Group>
@@ -104,7 +104,7 @@ export function Crud() {
                                 <div className="col-md-4">
                                     <Form.Group className="mb-3" controlId="formBasicApellido">
                                         <Form.Label>Apellido</Form.Label>
-                                        <Form.Control type="text"
+                                        <Form.Control type="text" autoComplete='off'
                                             onChange={(e) => setFormulario({ ...formulario, apellido:e.target.value })}
                                             value={formulario.apellido} required/>
                                     </Form.Group>
@@ -137,7 +137,7 @@ export function Crud() {
                                 <div className="col-md-4">
                                     <Form.Group className="mb-3" controlId="formBasicApodo">
                                         <Form.Label>Apodo</Form.Label>
-                                        <Form.Control type="text"
+                                        <Form.Control type="text" autoComplete='off'
                                             onChange={(e) => setFormulario({ ...formulario, apodo:e.target.value })}
                                             value={formulario.apodo}/>
                                     </Form.Group>
