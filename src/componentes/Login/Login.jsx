@@ -38,9 +38,9 @@ export const Login = () => {
     }
 
     return(
-        <>{loginSuccessful ? <Home />: <div className="custom-form">
+        <>{loginSuccessful ? <Home />: <div className="form-container">
                 <form>
-                    <label className="custom-label">Nombre:</label>
+                    <label className="custom-label">Usuario:</label>
                     <input onChange={(event)=>{setNombre(event.target.value)}}
                            placeholder="username"
                            className="custom-input"

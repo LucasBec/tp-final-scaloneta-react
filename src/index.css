@@ -1,4 +1,5 @@
-body {
+/* body {
+  min-height: 100vh;
   background: linear-gradient(to bottom, #3f003f, #770077, #200020);
   margin: 0;
   background-repeat: no-repeat;
@@ -9,7 +10,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+
+} */
+
+/*   display: flex;
+  flex-direction: column;
+  min-height: 100vh; */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

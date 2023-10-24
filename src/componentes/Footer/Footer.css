@@ -1,12 +1,13 @@
 /* Footer.css */
 .footer-container {
-  margin-top: 10%;
+  position: sticky;
+  top: 100%;
   background-color: rgb(211, 181, 15);
   padding: 20px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 10vh; 
+  height: 8rem; 
 }
 
 .social-icons svg {
