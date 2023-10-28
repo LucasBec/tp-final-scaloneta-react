@@ -1,0 +1,13 @@
+.miThead{
+    background-color: #075791 !important;    
+    color: white !important;
+}
+
+.miTabla{
+    max-height: 500px; 
+    overflow-y: auto; 
+}
+
+.miBoton{
+    margin-right: 5px;
+}

@@ -4,6 +4,9 @@ import axios from 'axios';
 
 import { Button, Table, Form, Card } from 'react-bootstrap';
 
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 import './Jugadores.css' ;
 
 
@@ -13,6 +16,20 @@ export function Crud() {
     // objeto para almacenar la información del formulario
     const [formulario, setFormulario] = 
     useState({dni:'',nombre:'', apellido:'', posicion:'', pieHabil:'', apodo:''});
+
+    const opcionesPosicion = [
+        { value: '', label: 'Seleccione una opción' },
+        { value: '0', label: 'Arquero' },
+        { value: '1', label: 'Defensor' },
+        { value: '2', label: 'Mediocampista' },
+        { value: '3', label: 'Delantero' },
+    ];
+    
+    const opcionesPieHabil = [
+        { value: '', label: 'Seleccione una opción' },
+        { value: '0', label: 'Derecho' },
+        { value: '1', label: 'Izquierdo' },
+    ];
 
     // datos de Futbolistas
     const [datos, setDatos] = useState(null);
@@ -33,17 +50,23 @@ export function Crud() {
         });             
     }
 
-    const eliminarfutbolista = async (idFutbolista) =>{
-        axios.delete(baseURL + 'futbolista/futbolistas/' + idFutbolista)
-        .then( res => {
-            buscarFutbolistas();
-        })
-        .catch( error => {
-            console.log(error);
-        })
-    }
+    const eliminarFutbolista = async (idFutbolista) => {
+        axios
+            .delete(baseURL + 'futbolista/futbolistas/' + idFutbolista)
+            .then((res) => {
+                buscarFutbolistas();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Futbolista eliminado',
+                    text: 'El futbolista ha sido eliminado con éxito.',
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
-    const editarfutbolista = async (idFutbolista) =>{
+    const editarFutbolista = async (idFutbolista) =>{
         axios.put(baseURL + 'futbolista/futbolistas/' + idFutbolista)
         .then( res => {
             buscarFutbolistas();
@@ -53,29 +76,61 @@ export function Crud() {
         })
     }
 
-    const enviarInformacion = async(e)=>{
+    const enviarInformacion = async (e) => {
         e.preventDefault();
-
-        axios.post(baseURL + 'futbolista/futbolistas', formulario )
-        .then( res => {
+    
+        try {
+            const res = await axios.post(baseURL + 'futbolista/futbolistas', formulario);
             console.log(res);
-            /* if(res.data.estado === 'OK'){
-                alert(res.data.msj);
+    
+            if (res.status === 201) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Futbolista creado',
+                    text: 'El futbolista se ha creado exitosamente.',
+                });
                 buscarFutbolistas();
-                setFormulario({dni:'',nombre:'', apellido:'', posicion:'', pieHabil:'', apodo:''});
-            }  */
-
-
-            if(res.status === 201){
-                alert(res.data.msj);
-                buscarFutbolistas();
-                setFormulario({dni:'',nombre:'', apellido:'', posicion:'', pieHabil:'', apodo:''});
+                setFormulario({
+                    dni: '',
+                    nombre: '',
+                    apellido: '',
+                    posicion: '',
+                    pieHabil: '',
+                    apodo: '',
+                });
             }
-        })
-        .catch(error => {
-            console.log(error)
+        } catch (error) {
+            console.error(error);
+    
+            if (error.response && error.response.status === 400 && error.response.data.msj === 'El DNI ya ha sido registrado anteriormente') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'DNI duplicado',
+                    text: 'El DNI ya ha sido registrado anteriormente. Por favor, ingresa un DNI válido.',
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ha ocurrido un error. Por favor, inténtalo de nuevo más tarde.',
+                });
+            }
+        }
+    };
 
-        })
+    function confirmarEliminacion(idFutbolista) {
+        Swal.fire({
+            title: 'Eliminar Futbolista',
+            text: '¿Está seguro de que desea eliminar este futbolista?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'eliminar',
+            cancelButtonText: 'cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                eliminarFutbolista(idFutbolista);
+            }
+        });
     }
 
     return (
@@ -96,17 +151,44 @@ export function Crud() {
                                 <div className="col-md-4">
                                     <Form.Group className="mb-3" controlId="formBasicNombre">
                                         <Form.Label>Nombre</Form.Label>
-                                        <Form.Control type="text" autoComplete='off'
-                                            onChange={(e) => setFormulario({ ...formulario, nombre:e.target.value })}
-                                            value={formulario.nombre} required/>
+                                        <Form.Control
+                                            type="text"
+                                            autoComplete='off'
+                                            onChange={(e) => {
+                                                const nombre = e.target.value;
+                                                const nombreCapitalizado = nombre
+                                                    .split(' ')  // Dividir el nombre en palabras
+                                                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalizar cada palabra
+                                                    .join(' ');  // Unir las palabras nuevamente
+                                                setFormulario({
+                                                    ...formulario,
+                                                    nombre: nombreCapitalizado
+                                                });
+                                            }}
+                                            value={formulario.nombre}
+                                            required
+                                        />
                                     </Form.Group>
                                 </div>
                                 <div className="col-md-4">
                                     <Form.Group className="mb-3" controlId="formBasicApellido">
                                         <Form.Label>Apellido</Form.Label>
-                                        <Form.Control type="text" autoComplete='off'
-                                            onChange={(e) => setFormulario({ ...formulario, apellido:e.target.value })}
-                                            value={formulario.apellido} required/>
+                                        <Form.Control
+                                            type="text"
+                                            autoComplete='off'
+                                            onChange={(e) => {
+                                                const apellido = e.target.value;
+                                                const apellidoCapitalizado = apellido
+                                                    .split(' ')  // Dividir el apellido en palabras
+                                                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalizar cada palabra
+                                                    .join(' ');  // Unir las palabras nuevamente
+                                                setFormulario({
+                                                    ...formulario,
+                                                    apellido: apellidoCapitalizado
+                                                });
+                                            }}
+                                            value={formulario.apellido}
+                                            required/>
                                     </Form.Group>
                                 </div>
                             </div>
@@ -114,22 +196,32 @@ export function Crud() {
                                 <div className="col-md-4">
                                     <Form.Group className="mb-3" controlId="formBasicPosicion">
                                         <Form.Label>Posición</Form.Label>
-                                        <Form.Select onChange={(e) => setFormulario({ ...formulario, posicion:e.target.value })} required>
-                                            <option value="">Seleccione una opción</option>
-                                            <option value="0">Arquero</option>
-                                            <option value="1">Defensor</option>
-                                            <option value="2">Mediocampista</option>
-                                            <option value="3">Delantero</option>
+                                        <Form.Select
+                                            onChange={(e) => setFormulario({ ...formulario, posicion: e.target.value })}
+                                            value={formulario.posicion}
+                                            required
+                                        >
+                                            {opcionesPosicion.map((opcion) => (
+                                                <option key={opcion.value} value={opcion.value}>
+                                                    {opcion.label}
+                                                </option>
+                                            ))}
                                         </Form.Select>
                                     </Form.Group>
                                 </div>
                                 <div className="col-md-4">
                                     <Form.Group className="mb-3" controlId="formBasicPieHabil">
                                         <Form.Label>Pie Habil</Form.Label>
-                                        <Form.Select onChange={(e) => setFormulario({ ...formulario, pieHabil:e.target.value })} required>
-                                            <option value="">Seleccione una opción</option>
-                                            <option value="0">Derecho</option>
-                                            <option value="1">Izquierdo</option>
+                                        <Form.Select
+                                            onChange={(e) => setFormulario({ ...formulario, pieHabil: e.target.value })}
+                                            value={formulario.pieHabil}
+                                            required
+                                        >
+                                            {opcionesPieHabil.map((opcion) => (
+                                                <option key={opcion.value} value={opcion.value}>
+                                                    {opcion.label}
+                                                </option>
+                                            ))}
                                         </Form.Select>
                                     </Form.Group>
                                     
@@ -180,8 +272,13 @@ export function Crud() {
                                     <td>{item.pieHabil}</td>
                                     <td>{item.apodo}</td>
                                     <td>
-                                        <Button variant="success" className='miBoton' onClick={()=>editarfutbolista(item.idFutbolista)}>Editar</Button>
-                                        <Button variant="danger" className='miBoton' onClick={()=>eliminarfutbolista(item.idFutbolista)}>Eliminar</Button>
+                                        <Button variant="success" className='miBoton' 
+                                        onClick={()=>editarFutbolista(item.idFutbolista)}>Editar</Button>
+
+                                        <Button
+                                            variant="danger"
+                                            className='miBoton'
+                                            onClick={() => confirmarEliminacion(item.idFutbolista)}> Eliminar </Button>
                                     </td>
                                 </tr>
                             ))) 

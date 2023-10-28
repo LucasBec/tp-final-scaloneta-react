@@ -12,7 +12,7 @@ import { Contactos } from '../Contactos/Contactos';
 import { Institucional } from '../Institucional/Institucional';
 import { Inicio} from '../Inicio/Inicio';
 import { Crud} from '../Jugadores/Jugadores';
-import { Convocatorias} from '../Convocatorias/Convocatorias';
+import { Convocatoria} from '../Convocatoria/Convocatoria';
 import './Header.css';
 import { Login } from '../Login/Login';
 
@@ -31,7 +31,7 @@ export function Header() {
               <Nav className='me-auto'>
 
                 <Nav.Link as={Link} to='/Jugadores' >Jugadores</Nav.Link>
-                <Nav.Link as={Link} to='/Convocatorias' >Convocatorias</Nav.Link>
+                <Nav.Link as={Link} to='/Convocatoria' >Convocatorias</Nav.Link>
                 <Nav.Link as={Link} to='/institucional' >Institucional</Nav.Link>
                 <Nav.Link as={Link} to='/Contactos' >Contactos</Nav.Link>
                
@@ -47,7 +47,7 @@ export function Header() {
           <Route path='/institucional' element={<Institucional />} />
           <Route path='/contactos' element={<Contactos />} />
           <Route path='/Jugadores' element={<Crud />} />
-          <Route path='/Convocatorias' element={<Convocatorias />} />
+          <Route path='/Convocatoria' element={<Convocatoria />} />
           <Route path='/Login' element={<Login />} />
         </Routes>
       </div>
