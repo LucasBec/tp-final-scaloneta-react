@@ -1,9 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
 import axios from 'axios';
-
 import { Button, Table, Form, Card } from 'react-bootstrap';
-
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
@@ -12,6 +10,8 @@ import './Jugadores.css' ;
 
 export function Crud() {
     const baseURL = 'http://localhost:3005/api/v1/';
+
+    const navigate = useNavigate();
 
     // objeto para almacenar la información del formulario
     const [formulario, setFormulario] = 
@@ -133,8 +133,22 @@ export function Crud() {
         });
     }
 
+    const dashboard = () => {        
+        navigate('/privado/dashboard');        
+    };
+
     return (
         <>
+            <div className='container mt-4 mb-2'>
+            <div className='row'>
+                <div className="col-md-11">
+                    <h1 className='crudTitle'>Futbolistas</h1>
+                </div>
+                <div className="col-md-1">
+                    <Button variant="info" onClick={dashboard}>Volver</Button>
+                </div>
+            </div>
+            </div>
             <div className='container mt-4 mb-2'>
                 <Card className='mt-3 mb-3'>
                     <Card.Body>
@@ -157,8 +171,8 @@ export function Crud() {
                                             onChange={(e) => {
                                                 const nombre = e.target.value;
                                                 const nombreCapitalizado = nombre
-                                                    .split(' ')  // Dividir el nombre en palabras
-                                                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalizar cada palabra
+                                                    .split(' ')  // Dividir el nombre en palabras por si se ingresan dos nombres
+                                                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalizar cada nombre
                                                     .join(' ');  // Unir las palabras nuevamente
                                                 setFormulario({
                                                     ...formulario,

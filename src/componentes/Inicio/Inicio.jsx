@@ -59,7 +59,7 @@ const Inicio = () => {
 
       <CarouselInicio />
 
-      <div class="divider"></div>
+      <div className="divider"></div>
 
       <Container className="p-index-html">
         <Row>

@@ -8,6 +8,8 @@ import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 
+import './Dashboard.css'
+
 const Dashboard = () => {
     const navigate = useNavigate();
     const { userData, setUserData } = useContext(UserContext);
@@ -16,19 +18,19 @@ const Dashboard = () => {
         navigate(`/privado/convocatoria`);        
     };
 
-    const irAEstudiantes = () => {
+    const irAJugadores = () => {
         navigate(`/privado/crud`);        
     };
 
     return (userData.user ?
         <>
         <div className='container mt-3 mb-1 mb-5'>
-            <h1>Bienvenido {userData.user.nombre}!</h1>
+            <h1 className='dashboardTitle'>Bienvenido {userData.user.nombre}!</h1>
             
             <ProtectedElement mustBeEntrenador={true}>
                 <div className='row'>
                     <div className="col-md-10">
-                        <h3>Convocatorias</h3>
+                        <h3 className='dashboardH3'>Convocatorias</h3>
                     </div>
                     <div className="col-md-2">
                         <Button variant="primary" onClick={irAConvocatoria}>Ver</Button>
@@ -36,10 +38,10 @@ const Dashboard = () => {
                 </div>
                 <div className='row'>
                     <div className="col-md-10">
-                        <h3>Estudiantes</h3>
+                    <h3 className='dashboardH3'>Estudiantes</h3>
                     </div>
                     <div className="col-md-2">
-                        <Button variant="primary" onClick={irAEstudiantes}>Ver</Button>
+                        <Button variant="primary" onClick={irAJugadores}>Ver</Button>
                     </div>
                 </div>
             </ProtectedElement>

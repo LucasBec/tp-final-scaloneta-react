@@ -1,13 +1,15 @@
 .titulo-inicio {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 36px;
+  font-size: 52px;
   font-weight: bold;
   color: #bcbcbc;
-  padding: 20px;
+  padding: 30px;
   margin: 0;
-  background: linear-gradient(to right, #220022, #a701a7, #220022);
+  background: linear-gradient(to right, #52005200,#9402946a, #c302c3b7,#9402946a, #52005200) !important;
+  border-radius: 20%;
   text-align: center;
   text-transform: uppercase;
+
 }
 
 .parallax-container {

@@ -1,0 +1,18 @@
+.dashboardTitle {
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 50%;
+    background: linear-gradient(to right, #52005200,#520052ee, #8b008bb7, #520052e7, #52005200) !important;
+    color: white;
+
+}
+
+.dashboardH3{
+    margin: 15px;
+    background: linear-gradient(to right,#5200521b, #8b008bb7, #52005257) !important;
+    color: rgba(222, 222, 222, 0.956);
+}
+
+button {
+    
+}

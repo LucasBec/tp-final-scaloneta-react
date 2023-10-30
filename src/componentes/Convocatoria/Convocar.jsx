@@ -32,7 +32,7 @@ export function Convocar(props) {
                 Authorization:`Bearer ${userData.token}`
             }
         })
-        .then( res => {           
+        .then( res => {
             console.log(res.data.dato); 
             setFutbolistas(res.data.dato);
         })
