@@ -38,7 +38,7 @@ const Dashboard = () => {
                 </div>
                 <div className='row'>
                     <div className="col-md-10">
-                    <h3 className='dashboardH3'>Estudiantes</h3>
+                    <h3 className='dashboardH3'>Futbolistas</h3>
                     </div>
                     <div className="col-md-2">
                         <Button variant="primary" onClick={irAJugadores}>Ver</Button>

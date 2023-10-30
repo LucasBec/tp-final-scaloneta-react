@@ -4,11 +4,16 @@ import axios from 'axios';
 import { Button, Table, Form, Card } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext/UserContext';
+
 
 import './Jugadores.css' ;
 
 
 export function Crud() {
+
+    const { userData } = useContext(UserContext);
     const baseURL = 'http://localhost:3005/api/v1/';
 
     const navigate = useNavigate();
@@ -36,10 +41,17 @@ export function Crud() {
     
     useEffect(()=>{
         buscarFutbolistas();
-    },[]); 
+    },[]);
+
+    // Accede al token
+    const token = userData.token;
 
     const buscarFutbolistas = async () =>{
-        axios.get(baseURL + 'futbolista/futbolistas')
+        axios.get(baseURL + 'futbolista/futbolistas', {
+            headers: {
+              'Authorization': `Bearer ${token}` // Reemplaza `tuTokenJWT` con la variable que almacena el token JWT.
+            }
+          })
         .then (res => {
             console.log(res);
             setDatos(res.data.dato);

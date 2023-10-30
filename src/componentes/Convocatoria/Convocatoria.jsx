@@ -3,9 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import {Button, Table, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
 import './Convocatoria.css';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext/UserContext';
 
 export function Convocatoria() {
     const baseURL = 'http://localhost:3005';
+
+    const { userData } = useContext(UserContext);
+    // Accede al token
+    const token = userData.token;
 
     // para poder navergar entre rutas
     const navigate = useNavigate();
@@ -20,6 +26,7 @@ export function Convocatoria() {
 
     // objeto para almacenar la informacion de la convocatoria
     const [convocatoria, setConvocatoria] = useState({fecha:'',rival:'', golesRecibidos:'', golesConvertidos:''});
+    
     
     
     useEffect(()=>{
@@ -51,7 +58,11 @@ export function Convocatoria() {
     }
 
     const buscarConvocatorias = async () =>{
-        axios.get(baseURL + '/api/v1/convocatoria/convocatorias')
+        axios.get(baseURL + '/api/v1/convocatoria/convocatorias', {
+            headers: {
+              'Authorization': `Bearer ${token}` // Reemplaza `tuTokenJWT` con la variable que almacena el token JWT.
+            }
+          })
             .then( resp => {
                 setConvocatorias(resp.data.dato);
             })
