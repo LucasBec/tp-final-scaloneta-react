@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './App.css';
 
 import { Header } from './componentes/Header/Header';
@@ -11,7 +10,7 @@ import { Crud } from './componentes/Jugadores/Jugadores';
 import { Convocatoria } from './componentes/Convocatoria/Convocatoria';
 import { Convocar } from './componentes/Convocatoria/Convocar';
 import { Convocados } from './componentes/Convocatoria/Convocados';
-import { Login } from './componentes/Login/Login';    
+import { Login } from './componentes/Login/Login';
 import { Dashboard } from './componentes/Dashboard/Dashboard';
 
 
