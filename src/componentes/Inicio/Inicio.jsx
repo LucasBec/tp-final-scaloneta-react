@@ -4,6 +4,7 @@ import { Alert, Container, Row, Col } from "react-bootstrap";
 import "./Inicio.css";
 import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap';
 
+
 //  rutas completas de las imágenes en la carpeta actual
 const imagenHome1 = require('./img carousel/imagen-home1.jpg');
 const argentinaCampeon = require('./img carousel/argentina-campeon-mundial-2022.jpg');

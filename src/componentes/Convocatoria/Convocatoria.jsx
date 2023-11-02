@@ -5,6 +5,8 @@ import axios from 'axios';
 import './Convocatoria.css';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext/UserContext';
+import Swal from 'sweetalert2';
+
 
 export function Convocatoria() {
     const baseURL = 'http://localhost:3005';
@@ -48,7 +50,11 @@ export function Convocatoria() {
     }
 
     const buscarRivales = async () =>{
-        axios.get(baseURL + '/api/v1/rival/rivales')
+        axios.get(baseURL + '/api/v1/rival/rivales', {
+            headers: {
+            'Authorization': `Bearer ${token}`
+            }
+          })
             .then( resp => {
                 setRivales(resp.data.dato);
             })
@@ -60,7 +66,7 @@ export function Convocatoria() {
     const buscarConvocatorias = async () =>{
         axios.get(baseURL + '/api/v1/convocatoria/convocatorias', {
             headers: {
-              'Authorization': `Bearer ${token}` // Reemplaza `tuTokenJWT` con la variable que almacena el token JWT.
+              'Authorization': `Bearer ${token}`
             }
           })
             .then( resp => {
@@ -83,23 +89,42 @@ export function Convocatoria() {
     const convocados = (idConvocatoria, rival) => {
         navigate(`/privado/convocados/${idConvocatoria}/${rival}`);        
     };
+
+    const resultado = (idConvocatoria, rival) => {
+        navigate(`/privado/resultado/${idConvocatoria}/${rival}`);        
+    };
     
     const crearConvocatoria = async(e)=>{
         e.preventDefault();
 
-        axios.post(baseURL + '/api/v1/convocatoria/nueva', convocatoria)
+        axios.post(baseURL + '/api/v1/convocatoria/nueva', convocatoria, { headers: {
+            'Authorization': `Bearer ${token}`
+        }})
         .then(res=> {
             if(res.data.estado==='OK'){
-                alert(res.data.msj);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Convocatoria creada',
+                    text: 'La convocatoria se ha creado exitosamente.',
+                  });
+                console.log(res.data.msj);
                 cerrarModal();
                 buscarConvocatorias();
             }
         })
         .catch(error=> {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text:
+                    'Ha ocurrido un error. Por favor, inténtalo de nuevo más tarde.',
+                });
             console.log(error);
         })
 
     }
+
+
 
     return (
         <>
@@ -135,7 +160,7 @@ export function Convocatoria() {
                                         <td>
                                             <Button variant="secondary" className='miBoton' onClick={() => convocar(item.idConvocatoria)}>Convocar</Button>
                                             <Button variant="success" className='miBoton' onClick={() => convocados(item.idConvocatoria, item.nombre)}>Convocados</Button>
-                                            <Button variant="info" className='miBoton'>Resultados</Button>                                            
+                                            <Button variant="info" className='miBoton' onClick={() => resultado(item.idConvocatoria)}>Resultado</Button>                                            
                                         </td>
                                     </tr>
                                 ))) 

@@ -19,6 +19,8 @@ export function Convocar(props) {
     
     const [convocados, setConvocados] = useState([]);
 
+    const [fecha, setFecha] = useState([]);
+
     const navigate = useNavigate();
 
     // buscamos los jugadores activos
@@ -56,8 +58,10 @@ export function Convocar(props) {
     // tarea: corregir
     const enviarInformacion = () => {    
         
-        const lista ={ idConvocatoria:parametro, futbolistas:convocados}  
-        axios.post(baseURL + 'futbolistaConvocatoria/nueva', lista)
+        const lista ={ idConvocatoria:parametro, futbolistas:convocados, fecha:fecha}  
+        axios.post(baseURL + 'futbolistaConvocatoria/nueva', lista , { headers: {
+            'Authorization': `Bearer ${userData.token}`
+        }})
         .then( async res => {           
             if (res.data.estado === 'OK') {
                 const result = await Swal.fire({

@@ -1,16 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Table, Button  } from 'react-bootstrap';
 import './Convocados.css';
 import axios from 'axios';
+import { UserContext } from '../UserContext/UserContext';
+import Swal from 'sweetalert2';
 
 export function Convocados(props) {
     const { idConvocatoria, rival } = useParams();
 
+    const { userData } = useContext(UserContext);
+
     const baseURL = 'http://localhost:3005/api/v1/';
+
+        // obtengo mi parametro id convocatoria
 
     const [convocados, setConvocados] = useState([]);
     const [titulares, setTitulares] = useState([]);
+    const [capitan, setCapitan] = useState([]);
 
     const navigate = useNavigate();
 
@@ -19,7 +26,11 @@ export function Convocados(props) {
     },[]); 
     
     const buscarConvocados = async () => {
-        axios.get(baseURL + 'futbolistaConvocatoria/futbolistaConvocatoria/' + idConvocatoria)        
+        axios.get(baseURL + 'futbolistaConvocatoria/futbolistaConvocatoria/' + idConvocatoria, {
+            headers: {
+              'Authorization': `Bearer ${userData.token}`
+            }
+          })
         .then( res => {     
             // tarea agregar control       
             setConvocados(res.data.dato);
@@ -35,11 +46,50 @@ export function Convocados(props) {
             setTitulares(titulares.filter((rowId) => rowId !== idFutbolista));
         } else {
             if(titulares.length === 11){
-                alert('lalal')
+                alert('ya hay 11 titulares seleccionados')
+                return;
             }else{
                 setTitulares([...titulares, idFutbolista])
             }
         } 
+    }
+
+    const marcarCapitan = async (idFutbolista) => {
+        // Verificar si ya hay un capitán en la lista de titulares
+        if (capitan.includes(idFutbolista)) {
+            // Si ya está seleccionada, quitarla de la lista de seleccionadas
+            setCapitan(capitan.filter((rowId) => rowId !== idFutbolista));
+        }else {
+            if(capitan.length === 1){
+                alert('ya hay un capitan seleccionado')
+                return;
+            }else{
+                setCapitan([...capitan, idFutbolista])
+            }
+        } 
+    }
+
+    const enviarEquipoTitular = () => {    
+        
+        const lista ={ idConvocatoria:idConvocatoria, futbolistas:titulares, capitan:capitan}  
+        axios.post(baseURL + 'futbolistaConvocatoria/equipoTitular', lista , { headers: {
+            'Authorization': `Bearer ${userData.token}`
+        }})
+        .then( async res => {           
+            if (res.data.estado === 'OK') {
+                const result = await Swal.fire({
+                    text: res.data.msj,
+                    icon:'success'})
+
+                if (result.isConfirmed){
+                    navigate('/privado/convocatoria');
+                }    
+            }
+        })
+        .catch(error =>{
+            console.log(error);
+        });
+
     }
 
     const volver = () => {
@@ -65,7 +115,7 @@ export function Convocados(props) {
                                 {/* <th className='miThead'>id</th> */}
                                 <th className='miThead'>Nombre</th>
                                 <th className='miThead'>Apellido</th>
-                                <th className='miThead'>Pie Habil</th>
+                                <th className='miThead'>Posición</th>
                                 <th className='miThead'>Dorsal</th>
                                 <th className='miThead'>Capitán</th>
                                 <th className='miThead'>Titular ({titulares.length})</th>
@@ -77,14 +127,14 @@ export function Convocados(props) {
                                     <tr key={index}> 
                                         <td>{item.nombre}</td>
                                         <td>{item.apellido}</td>
-                                        <td>{item.pieHabil}</td>
+                                        <td>{item.posicion}</td>
                                         <td>{item.dorsal}</td>
                                         <td>
                                             <input
-                                                type="radio"
-                                                // checked={titulares.includes(item.idFutbolista)}
-                                                // onChange={() => marcarCapitan(item.idFutbolista)}
-                                            /> 
+                                                type="checkbox"
+                                                checked={capitan.includes(item.idFutbolista)}
+                                                onChange={() => marcarCapitan(item.idFutbolista)}
+                                            />
                                         </td>
                                         <td>
                                             <input
