@@ -21,15 +21,16 @@
     z-index: 1; /* Para que esté por encima del contenido de la tabla */
 }
 
+
+
 .miTabla{
-    max-height: 600px;
+    max-height: 650px;
     overflow-y: auto;
     
 }
 
-.miBoton{
-    margin-right: 5px;
-    margin-bottom: 8px;
+.miBotonEliminar, .miBotonEditar{
+    margin: 5px;
 }
 
 thead {
