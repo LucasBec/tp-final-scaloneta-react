@@ -11,3 +11,17 @@
 .miBoton{
     margin-right: 5px;
 }
+
+h1, h2 {
+    color: aliceblue;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+.numberInput {
+    width: 45px;
+    
+}

@@ -12,6 +12,7 @@ import { Convocar } from './componentes/Convocatoria/Convocar';
 import { Convocados } from './componentes/Convocatoria/Convocados';
 import { Login } from './componentes/Login/Login';
 import { Dashboard } from './componentes/Dashboard/Dashboard';
+import { Resultado } from './componentes/Convocatoria/Resultado'
 
 
 import { UserProvider } from './componentes/UserContext/UserContext';
@@ -59,6 +60,13 @@ function App() {
             element={
               <ProtectedRoute mustBeEntrenador={true}>
                 <Convocar/>
+              </ProtectedRoute>
+          }/>
+
+          <Route path='/privado/resultado/:idConvocatoria/:rival' 
+            element={
+              <ProtectedRoute mustBeEntrenador={true}>
+                <Resultado />
               </ProtectedRoute>
           }/>
 
