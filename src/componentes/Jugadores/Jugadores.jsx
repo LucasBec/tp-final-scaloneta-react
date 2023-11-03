@@ -12,9 +12,16 @@ import './Jugadores.css';
 
 export function Crud() {
   const { userData } = useContext(UserContext);
+  
   const baseURL = 'http://localhost:3005/api/v1/';
 
+  const [archivo, setArchivo] = useState(null);
   const navigate = useNavigate();
+
+  const changeArchivo = (e) => {        
+    setArchivo(e.target.files[0]);
+};
+
 
   const [formulario, setFormulario] = useState({
     dni: '',
@@ -360,10 +367,23 @@ export function Crud() {
                   </Form.Group>
                 </div>
               </div>
-
+              <div className='row'>
+                            <div className="col-md-12">
+                                <Form.Group className="mb-3" controlId="formBasicCelular">
+                                    <Form.Label>Seleccionar Archivo:</Form.Label>
+                                    <Form.Control type="file"                                                                            
+                                        accept=".jpg, .jpeg, .png" // Define los tipos de archivo permitidos                                        
+                                        onChange={changeArchivo}
+                                    />
+                                </Form.Group>
+                            </div>                            
+              </div>          
               <Button variant='primary' type='submit'>
                 Crear
               </Button>
+
+                        
+
             </Form>
           </Card.Body>
         </Card>
@@ -388,6 +408,7 @@ export function Crud() {
         <Table striped bordered hover>
           <thead>
             <tr>
+              <th className='miThead'>Foto</th>
               <th className='miThead'>ID</th>
               <th className='miThead'>DNI</th>
               <th className='miThead'>Apellido</th>
@@ -414,6 +435,7 @@ export function Crud() {
               )
                 .map((item, index) => (
                   <tr key={index}>
+                    <td>{item.foto}</td>
                     <td>{item.idFutbolista}</td>
                     <td>{item.dni}</td>
                     <td>{item.apellido}</td>
