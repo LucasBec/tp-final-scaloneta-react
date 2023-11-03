@@ -39,12 +39,14 @@ export function Crud() {
     { value: '1', label: 'Izquierdo' },
   ];
 
-    // datos de Futbolistas
-    const [datos, setDatos] = useState(null);
-    
-    useEffect(()=>{
-        buscarFutbolistas();
-    },[]);
+  const [datos, setDatos] = useState(null);
+  const [filtro, setFiltro] = useState('');
+  const [jugadorSeleccionado, setJugadorSeleccionado] = useState(null);
+
+
+  useEffect(() => {
+    buscarFutbolistas();
+  }, []);
 
   const token = userData.token;
 
@@ -89,15 +91,57 @@ export function Crud() {
       });
   };
 
-    const editarFutbolista = async (idFutbolista) =>{
-        axios.put(baseURL + 'futbolista/futbolistas/' + idFutbolista)
-        .then( res => {
-            buscarFutbolistas();
-        })
-        .catch( error => {
-            console.log(error);
-        })
+  const editarFutbolista = (idFutbolista) => {
+    // Buscar el jugador seleccionado por ID
+    const jugador = datos.find((item) => item.idFutbolista === idFutbolista);
+    if (jugador) {
+      // Asignar el jugador seleccionado al estado
+      console.log(jugadorSeleccionado)
+      setJugadorSeleccionado(jugador);
     }
+  };
+
+  const handleGuardarEdicion = async (formularioEdicion) => {
+    if (jugadorSeleccionado) {
+      // ID del jugador seleccionado
+      const idFutbolista = jugadorSeleccionado.idFutbolista;
+  
+      try {
+        // Realiza una solicitud PUT para editar el jugador con los datos del formulario
+        const response = await axios.put(
+          `${baseURL}futbolista/futbolistas/${idFutbolista}`,
+          formularioEdicion,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+  
+        if (response.status === 200) {
+          // Actualiza la lista de jugadores después de la edición
+          buscarFutbolistas();
+  
+          // Cierra el modal y restablece el estado de jugadorSeleccionado a null
+          setJugadorSeleccionado(null);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Ha ocurrido un error al editar el futbolista.",
+          });
+        }
+      } catch (error) {
+        console.error(error);
+  
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Ha ocurrido un error al editar el futbolista. Por favor, inténtalo de nuevo más tarde.",
+        });
+      }
+    }
+  };
 
   const enviarInformacion = async (e) => {
     e.preventDefault();
@@ -317,61 +361,98 @@ export function Crud() {
                 </div>
               </div>
 
-                            <Button variant="primary" type="submit">
-                                Crear
-                            </Button>
-                        </Form>  
-                    </Card.Body>
-                </Card>
-            </div>
+              <Button variant='primary' type='submit'>
+                Crear
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
+      </div>
 
-            <div className='container mt-5 mb-5 miTabla'>
-                <Table striped bordered hover >
-                    <thead >
-                        <tr>
-                            <th className='miThead'>ID</th>
-                            <th className='miThead'>DNI</th>
-                            <th className='miThead'>Apellido</th>
-                            <th className='miThead'>Nombre</th>
-                            <th className='miThead'>Posicion</th>
-                            <th className='miThead'>Pie Habil</th>
-                            <th className='miThead'>Apodo</th>
-                            <th className='miThead'>Acciones</th>
-                        </tr>
-                    </thead>
+      <div className='container mt-5'>
+        <div className='row mb-2'>
+          <div className='col-md-6 mx-auto mt-1 '>
+            <input
+              type='text'
+              placeholder='Buscar por nombre, apellido, documento o posición...'
+              value={filtro}
+              onChange={(e) => setFiltro(e.target.value)}
+              className='form-control'
+            />
+          </div>
+        </div>
+      </div>
+      
 
-                    <tbody>
-                        {
-                            datos ? (datos.map((item, index) => (
-                                <tr key={index}> 
-                                    <td>{item.idFutbolista}</td>
-                                    <td>{item.dni}</td>
-                                    <td>{item.apellido}</td>
-                                    <td>{item.nombre}</td>
-                                    <td>{item.posicion}</td>
-                                    <td>{item.pieHabil}</td>
-                                    <td>{item.apodo}</td>
-                                    <td>
-                                        <Button variant="success" className='miBoton' 
-                                        onClick={()=>editarFutbolista(item.idFutbolista)}>Editar</Button>
+      <div className='container mt-5 mb-5 miTabla'>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th className='miThead'>ID</th>
+              <th className='miThead'>DNI</th>
+              <th className='miThead'>Apellido</th>
+              <th className='miThead'>Nombre</th>
+              <th className='miThead'>Posicion</th>
+              <th className='miThead'>Pie Habil</th>
+              <th className='miThead'>Apodo</th>
+              <th className='miThead'>Acciones</th>
+            </tr>
+          </thead>
 
-                                        <Button
-                                            variant="danger"
-                                            className='miBoton'
-                                            onClick={() => confirmarEliminacion(item.idFutbolista)}> Eliminar </Button>
-                                    </td>
-                                </tr>
-                            ))) 
-                            : 
-                            (
-                                <tr>
-                                    {/* TAREA: un mensaje o similar  */}
-                                </tr>
-                            )
-                        }
-                    </tbody>
-                </Table> 
-            </div>
-        </>
-    );
+          <tbody>
+            {datos ? (
+              datos
+              .filter(
+                (item) =>
+                  ((item.nombre && item.nombre.toLowerCase().includes(filtro.toLowerCase())) ||
+                  (item.apellido && item.apellido.toLowerCase().includes(filtro.toLowerCase())) ||
+                  (item.posicion && item.posicion.toLowerCase().includes(filtro.toLowerCase())) ||
+                  (item.pieHabil && item.pieHabil.toLowerCase().includes(filtro.toLowerCase())) ||
+                  (item.apodo && item.apodo.toLowerCase().includes(filtro.toLowerCase()))) ||
+                  (item.dni && item.dni.toString().includes(filtro)) ||
+                  (item.idFutbolista && item.idFutbolista.toString().includes(filtro))
+              )
+                .map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.idFutbolista}</td>
+                    <td>{item.dni}</td>
+                    <td>{item.apellido}</td>
+                    <td>{item.nombre}</td>
+                    <td>{item.posicion}</td>
+                    <td>{item.pieHabil}</td>
+                    <td>{item.apodo}</td>
+                    <td>
+                      <Button
+                        variant='success'
+                        className='miBotonEditar'
+                        onClick={() => editarFutbolista(item.idFutbolista)}
+                      >
+                        Editar
+                      </Button>
+
+                      <Button
+                        variant='danger'
+                        className='miBotonEliminar'
+                        onClick={() => confirmarEliminacion(item.idFutbolista)}
+                      >
+                        Eliminar
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+            ) : (
+              <tr>
+                {/* TAREA: un mensaje o similar  */}
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </div>
+      <ModalEdicion
+        jugadorSeleccionado={jugadorSeleccionado}
+        onHide={() => setJugadorSeleccionado(null)}
+        onSave={handleGuardarEdicion}
+      />
+    </>
+  );
 }

@@ -40,7 +40,7 @@ export function Convocados(props) {
         });
     }
 
-    const titularizar = async (idFutbolista) => {
+/*     const titularizar = async (idFutbolista) => {
         if (titulares.includes(idFutbolista)) {
             // Si ya está seleccionada, quitarla de la lista de seleccionadas
             setTitulares(titulares.filter((rowId) => rowId !== idFutbolista));
@@ -52,6 +52,32 @@ export function Convocados(props) {
                 setTitulares([...titulares, idFutbolista])
             }
         } 
+    }; */
+
+    const titularizar = async (idFutbolista, dorsalValue) => {
+        if (titulares.includes(idFutbolista)) {
+            // Si ya está seleccionada, quitarla de la lista de seleccionadas
+            setTitulares(titulares.filter((rowId) => rowId !== idFutbolista));
+    
+            // También debes eliminar el dorsal correspondiente
+            const index = convocados.findIndex((item) => item.idFutbolista === idFutbolista);
+            const nuevosDorsales = [...dorsales];
+            nuevosDorsales[index] = 0; // Almacenar como un número entero
+            setDorsales(nuevosDorsales);
+        } else {
+            if (titulares.length === 11) {
+                alert('Ya hay 11 titulares seleccionados');
+                return;
+            } else {
+                setTitulares([...titulares, idFutbolista]);
+    
+                // Actualiza el estado dorsal con el nuevo valor entero
+                const index = convocados.findIndex((item) => item.idFutbolista === idFutbolista);
+                const nuevosDorsales = [...dorsales];
+                nuevosDorsales[index] = dorsalValue;
+                setDorsales(nuevosDorsales);
+            }
+        }
     };
 
     const cambiarDorsal = (index, dorsalValue) => {
@@ -91,33 +117,44 @@ export function Convocados(props) {
     };
 
     const enviarEquipoTitular = () => {
+        // Obtén los ID de los futbolistas titulares
+        const futbolistasTitulares = titulares;
 
-        
-        const equipoTitular = {titulares, capitan};
-        const data = {idConvocatoria, equipoTitular}
+        // Crea un objeto que incluya los ID de los futbolistas titulares y sus dorsales
+        const equipoTitular = futbolistasTitulares.map((idFutbolista) => ({
+            idFutbolista,
+            dorsal: dorsales[convocados.findIndex((item) => item.idFutbolista === idFutbolista)]
+        }));
 
-         console.log(data)
+        const idCapitan = capitan[0]
 
-         //ENVIAR AL SERVIDOR Y BASE DE DATOS
-       axios.put(baseURL + 'futbolistaConvocatoria/equipoTitular', data , { headers: {
-            'Authorization': `Bearer ${userData.token}`
-        }})
-        .then( async res => {
-            if (res.data.estado === 'OK') {
-                const result = await Swal.fire({
-                    text: res.data.msj,
-                    icon:'success'})
-                    console.log('id conv: ', idConvocatoria)
-                    console.log('Equipo Titular: ', equipoTitular)
+        const data = { idConvocatoria, equipoTitular, idCapitan };
 
-                if (result.isConfirmed){
-                    navigate('/privado/convocatoria');
-                }    
+        console.log('data: ', data)
+
+        // Envía los datos al servidor
+        axios.put(baseURL + 'futbolistaConvocatoria/equipoTitular', data, {
+            headers: {
+                'Authorization': `Bearer ${userData.token}`
             }
         })
-        .catch(error =>{
-            console.log(error);
-        });
+            .then(async (res) => {
+                if (res.data.estado === 'OK') {
+                    const result = await Swal.fire({
+                        text: res.data.msj,
+                        icon: 'success'
+                    });
+                    console.log('id conv: ', idConvocatoria);
+                    console.log('Equipo Titular: ', equipoTitular);
+
+                    if (result.isConfirmed) {
+                        navigate('/privado/convocatoria');
+                    }
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
     };
 
