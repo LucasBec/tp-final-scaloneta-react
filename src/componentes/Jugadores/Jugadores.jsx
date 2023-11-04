@@ -14,8 +14,8 @@ export function Crud() {
   const { userData } = useContext(UserContext);
   
   const baseURL = 'http://localhost:3005/api/v1/';
+  
 
-  const [archivo, setArchivo] = useState(null);
   const navigate = useNavigate();
 
   const changeArchivo = (e) => {        
@@ -46,6 +46,7 @@ export function Crud() {
     { value: '1', label: 'Izquierdo' },
   ];
 
+  const [archivo, setArchivo] = useState(null);
   const [datos, setDatos] = useState(null);
   const [filtro, setFiltro] = useState('');
   const [jugadorSeleccionado, setJugadorSeleccionado] = useState(null);
@@ -433,9 +434,15 @@ export function Crud() {
                   (item.dni && item.dni.toString().includes(filtro)) ||
                   (item.idFutbolista && item.idFutbolista.toString().includes(filtro))
               )
-                .map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.foto}</td>
+              .map((item, index) => ( 
+                <tr key={index}>
+                    <td>
+                        <img
+                            className='foto'
+                            src={`http://localhost:3010/archivos/${item.foto}`}
+                            alt={item.foto}
+                        />
+                    </td>
                     <td>{item.idFutbolista}</td>
                     <td>{item.dni}</td>
                     <td>{item.apellido}</td>
