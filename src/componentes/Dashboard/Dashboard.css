@@ -1,16 +1,29 @@
 .dashboardTitle {
-    padding: 5px;
+   
+    padding: 10px;
     font-weight: bold;
-    border-radius: 50%;
-    background: linear-gradient(to right, #52005200,#520052ee, #8b008bb7, #520052e7, #52005200) !important;
+    border-radius: 10px;
+    background: linear-gradient(to right, #52005200, #520052ee, #8b008bb7, #520052e7, #52005200);
     color: white;
-
+    text-align: center;
 }
 
-.dashboardH2{
-    margin: 8%;
-    background: linear-gradient(to right,#52005212, #8b008b65, #52005235) !important;
+.dashboardH2 {
+    margin: 3% 0;
+    padding: 10px;
+    background: linear-gradient(to right, #52005212, #8b008b65, #52005235);
     color: rgba(222, 222, 222, 0.956);
+    border-radius: 5px;
+}
+
+.row.align-items-center {
+    animation: fadeIn 1s ease-in-out forwards;
+  
+}
+
+.col-md-6.text-center {
+    animation: fadeIn 1s ease-in-out forwards;
+ 
 }
 
 
@@ -21,6 +34,11 @@
     animation: fadeIn 1s ease-in-out forwards; /* forwards mantiene los estilos finales de la animación */
 }
 
+.jugador-pelota-img2{
+    justify-content: center;
+    opacity: 0; /* Comienza con una opacidad de 0 para la animación de entrada */
+    animation: fadeIn 1s; /* forwards mantiene los estilos finales de la animación */
+}
 
 @keyframes fadeIn {
     0% {
@@ -32,5 +50,7 @@
         transform: translateY(0);
     }
 }
+
+
 
 

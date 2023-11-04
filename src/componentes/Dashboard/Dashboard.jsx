@@ -15,6 +15,7 @@ const Dashboard = () => {
     const { userData, setUserData } = useContext(UserContext);
     const [estadistica, setEstadistica ] = useState(String);
     const jugadorPelota = require('./pateando una pelota.png');
+    const jugadorPelota2 = require('./pateando una pelota2.png');
     useEffect(()=>{
         // busco la info estadistica unicamente cuando sea presidente
         if(userData.user.tipoUsuario === 0){
@@ -52,22 +53,22 @@ const Dashboard = () => {
             <h1 className='dashboardTitle'>¡ Bienvenido {userData.user.nombre} !</h1>
             
             <ProtectedElement mustBeEntrenador={true}>
-            <div className='row align-items-center'>
-                <div className="col-md-10 text-center">
-                    <h2 className='dashboardH2'>Convocatorias</h2>
-                </div>
-                <div className="col-md-2 text-center">
-                    <Button variant="primary" onClick={irAConvocatoria}>Ver</Button>
-                </div>
+            <div className='container mt-3'>
+        <div className='row justify-content-center'>
+            <div className='col-md-6 text-center'>
+                <h2 className='dashboardH2'>Convocatorias</h2>
+                <Button variant='primary' onClick={irAConvocatoria}>Ver</Button>
             </div>
-            <div className='row align-items-center'>
-                <div className="col-md-10 text-center">
-                    <h2 className='dashboardH2'>Futbolistas</h2>
-                </div>
-                <div className="col-md-2 text-center">
-                    <Button variant="primary" onClick={irAJugadores}>Ver</Button>
-                </div>
+            
+            <div className='col-md-6 text-center'>
+                <h2 className='dashboardH2'>Futbolistas</h2>
+                <Button variant='primary' onClick={irAJugadores}>Ver</Button>
             </div>
+            <div>
+                <img src={jugadorPelota2} alt="Jugador pateando una pelota2" className="jugador-pelota-im" />
+            </div>
+        </div>
+        </div>
             </ProtectedElement>
 
              <ProtectedElement mustBePresidente={true}>
