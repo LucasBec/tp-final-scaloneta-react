@@ -21,28 +21,25 @@
     z-index: 1; /* Para que esté por encima del contenido de la tabla */
 }
 
-
-
 .miTabla{
     max-height: 650px;
     overflow-y: auto;
-    
 }
 
-.tablaContainer{
-    max-height: 745px; 
-    overflow-y: auto; 
-}
 
 .miBotonEliminar, .miBotonEditar{
     margin: 5px;
 }
 
 thead {
+
     display: table-header-group;
     vertical-align: middle;
     border-color: inherit;
     
     
 }
-
+.tdFoto {
+    max-width: 60px;
+    max-height: 60px;
+}

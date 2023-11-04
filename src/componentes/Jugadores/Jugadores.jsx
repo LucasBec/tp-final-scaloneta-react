@@ -18,12 +18,7 @@ export function Crud() {
 
   const navigate = useNavigate();
 
-  const changeArchivo = (e) => {        
-    setArchivo(e.target.files[0]);
-};
-
-
-  const [formulario, setFormulario] = useState({
+  const [futbolista, setFutbolista] = useState({
     dni: '',
     nombre: '',
     apellido: '',
@@ -50,6 +45,10 @@ export function Crud() {
   const [datos, setDatos] = useState(null);
   const [filtro, setFiltro] = useState('');
   const [jugadorSeleccionado, setJugadorSeleccionado] = useState(null);
+
+  const changeArchivo = (e) => {        
+    setArchivo(e.target.files[0]);
+  };
 
 
   useEffect(() => {
@@ -152,61 +151,89 @@ export function Crud() {
   };
 
   const enviarInformacion = async (e) => {
+    console.log('futbolista: ', futbolista)
     e.preventDefault();
+    const formData = new FormData();
+        formData.append('dni', futbolista.dni);
+        formData.append('nombre', futbolista.nombre);
+        formData.append('apellido', futbolista.apellido);
+        formData.append('posicion', futbolista.posicion);
+        formData.append('pieHabil', futbolista.pieHabil);
+        formData.append('apodo', futbolista.apodo);
+        formData.append('foto', archivo);
 
-    try {
-      const res = await axios.post(
-        baseURL + 'futbolista/futbolistas',
-        formulario,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+    /* console.log('formData: ', formData)
+
+    //para ver el contenido del formData
+    
+    const dni = formData.get('dni');
+    const nombre = formData.get('nombre');
+    const apellido = formData.get('apellido');
+    const posicion = formData.get('posicion');
+    const pieHabil = formData.get('pieHabil');
+    const apodo = formData.get('apodo');
+    const foto = formData.get('foto');
+
+    console.log('=======================================')
+    
+    for (const [name, value] of formData.entries()) {
+      console.log(`${name}: ${value}`);
+    } */
+      
+      try {
+        const res = await axios.post(
+          baseURL + 'futbolista/futbolistas',
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log(res);
+
+        if (res.status === 201) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Futbolista creado',
+            text: 'El futbolista se ha creado exitosamente.',
+          });
+          buscarFutbolistas();
+          setFutbolista({
+            dni: '',
+            nombre: '',
+            apellido: '',
+            posicion: '',
+            pieHabil: '',
+            apodo: '',
+          });
         }
-      );
+      } catch (error) {
+        console.error(error);
 
-      console.log(res);
-
-      if (res.status === 201) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Futbolista creado',
-          text: 'El futbolista se ha creado exitosamente.',
-        });
-        buscarFutbolistas();
-        setFormulario({
-          dni: '',
-          nombre: '',
-          apellido: '',
-          posicion: '',
-          pieHabil: '',
-          apodo: '',
-        });
+        if (
+          error.response &&
+          error.response.status === 400 &&
+          error.response.data.msj === 'El DNI ya ha sido registrado anteriormente'
+        ) {
+          Swal.fire({
+            icon: 'error',
+            title: 'DNI duplicado',
+            text:
+              'El DNI ya ha sido registrado anteriormente. Por favor, ingresa un DNI válido.',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text:
+              'Ha ocurrido un error. Por favor, inténtalo de nuevo más tarde.',
+          });
+        }
       }
-    } catch (error) {
-      console.error(error);
-
-      if (
-        error.response &&
-        error.response.status === 400 &&
-        error.response.data.msj === 'El DNI ya ha sido registrado anteriormente'
-      ) {
-        Swal.fire({
-          icon: 'error',
-          title: 'DNI duplicado',
-          text:
-            'El DNI ya ha sido registrado anteriormente. Por favor, ingresa un DNI válido.',
-        });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text:
-            'Ha ocurrido un error. Por favor, inténtalo de nuevo más tarde.',
-        });
-      }
-    }
-  };
+    };
 
   function confirmarEliminacion(idFutbolista) {
     Swal.fire({
@@ -253,9 +280,9 @@ export function Crud() {
                       type='text'
                       autoComplete='off'
                       onChange={(e) =>
-                        setFormulario({ ...formulario, dni: e.target.value })
+                        setFutbolista({ ...futbolista, dni: e.target.value })
                       }
-                      value={formulario.dni}
+                      value={futbolista.dni}
                       required
                     />
                   </Form.Group>
@@ -275,12 +302,12 @@ export function Crud() {
                               word.charAt(0).toUpperCase() + word.slice(1)
                           )
                           .join(' ');
-                        setFormulario({
-                          ...formulario,
+                        setFutbolista({
+                          ...futbolista,
                           nombre: nombreCapitalizado,
                         });
                       }}
-                      value={formulario.nombre}
+                      value={futbolista.nombre}
                       required
                     />
                   </Form.Group>
@@ -300,12 +327,12 @@ export function Crud() {
                               word.charAt(0).toUpperCase() + word.slice(1)
                           )
                           .join(' ');
-                        setFormulario({
-                          ...formulario,
+                        setFutbolista({
+                          ...futbolista,
                           apellido: apellidoCapitalizado,
                         });
                       }}
-                      value={formulario.apellido}
+                      value={futbolista.apellido}
                       required
                     />
                   </Form.Group>
@@ -317,12 +344,12 @@ export function Crud() {
                     <Form.Label>Posición</Form.Label>
                     <Form.Select
                       onChange={(e) =>
-                        setFormulario({
-                          ...formulario,
+                        setFutbolista({
+                          ...futbolista,
                           posicion: e.target.value,
                         })
                       }
-                      value={formulario.posicion}
+                      value={futbolista.posicion}
                       required
                     >
                       {opcionesPosicion.map((opcion) => (
@@ -338,12 +365,12 @@ export function Crud() {
                     <Form.Label>Pie Habil</Form.Label>
                     <Form.Select
                       onChange={(e) =>
-                        setFormulario({
-                          ...formulario,
+                        setFutbolista({
+                          ...futbolista,
                           pieHabil: e.target.value,
                         })
                       }
-                      value={formulario.pieHabil}
+                      value={futbolista.pieHabil}
                       required
                     >
                       {opcionesPieHabil.map((opcion) => (
@@ -361,9 +388,9 @@ export function Crud() {
                       type='text'
                       autoComplete='off'
                       onChange={(e) =>
-                        setFormulario({ ...formulario, apodo: e.target.value })
+                        setFutbolista({ ...futbolista, apodo: e.target.value })
                       }
-                      value={formulario.apodo}
+                      value={futbolista.apodo}
                     />
                   </Form.Group>
                 </div>
@@ -372,12 +399,12 @@ export function Crud() {
                             <div className="col-md-12">
                                 <Form.Group className="mb-3" controlId="formBasicCelular">
                                     <Form.Label>Seleccionar Archivo:</Form.Label>
-                                    <Form.Control type="file"                                                                            
-                                        accept=".jpg, .jpeg, .png" // Define los tipos de archivo permitidos                                        
+                                    <Form.Control type="file"
+                                        accept=".jpg, .jpeg, .png" // Define los tipos de archivo permitidos
                                         onChange={changeArchivo}
                                     />
                                 </Form.Group>
-                            </div>                            
+                            </div>
               </div>          
               <Button variant='primary' type='submit'>
                 Crear
@@ -438,9 +465,9 @@ export function Crud() {
                 <tr key={index}>
                     <td>
                         <img
-                            className='foto'
-                            src={`http://localhost:3010/archivos/${item.foto}`}
-                            alt={item.foto}
+                            className='tdFoto'
+                            src={`http://localhost:3005/archivos/${item.foto}`}
+                            alt={item.foto || 'default.jpg'}
                         />
                     </td>
                     <td>{item.idFutbolista}</td>
