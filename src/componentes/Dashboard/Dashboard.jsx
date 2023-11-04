@@ -46,51 +46,39 @@ const Dashboard = () => {
                 </div>
             </ProtectedElement>
             <ProtectedElement mustBePresidente={true}>
-                <div className='row'>
-                    <div className='container mt-3 mb-1 mb-5'>
-                        <div className="col-md-12">
-                            <div className='row'>
-                                <Col sm={6} md={4} lg={3}>
-                                    <Card bg='success'>
-                                        <Card.Body>
-                                            <Card.Title>Futbolistas Creados</Card.Title>
-                                            <Card.Subtitle className="mb-2 text-muted">Activos</Card.Subtitle>
-                                            <Card.Text><h3>100</h3></Card.Text>                                    
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col sm={6} md={4} lg={3}>
-                                    <Card bg='danger'>
-                                        <Card.Body>
-                                            <Card.Title>Lesionados</Card.Title>
-                                            <Card.Subtitle className="mb-2 text-muted">No llegan...</Card.Subtitle>
-                                            <Card.Text><h3>10</h3></Card.Text>                                    
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col sm={6} md={4} lg={3}>
-                                    <Card bg='info'>
-                                        <Card.Body>
-                                            <Card.Title>Convocatorias</Card.Title>
-                                            <Card.Subtitle className="mb-2 text-muted">Con 26 convocados</Card.Subtitle>
-                                            <Card.Text><h3>10</h3></Card.Text>                                    
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col sm={6} md={4} lg={3}>
-                                    <Card bg='info'>
-                                        <Card.Body>
-                                            <Card.Title>Próximo Partido</Card.Title>
-                                            <Card.Subtitle className="mb-2 text-muted">Córdoba</Card.Subtitle>
-                                            <Card.Text><h3>14/11/2023</h3></Card.Text>                                    
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ProtectedElement>
+    <div className='container mt-3 mb-1 mb-5'>
+        <div className="row justify-content-center">
+            <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <Card bg='success'>
+                    <Card.Body>
+                        <Card.Title>Futbolistas Creados</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">Activos</Card.Subtitle>
+                        <Card.Text><h3>100</h3></Card.Text>                                    
+                    </Card.Body>
+                </Card>
+            </div>
+            <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <Card bg='info'>
+                    <Card.Body>
+                        <Card.Title>Convocatorias</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">Con 26 convocados</Card.Subtitle>
+                        <Card.Text><h3>10</h3></Card.Text>                                    
+                    </Card.Body>
+                </Card>
+            </div>
+            <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <Card bg='info'>
+                    <Card.Body>
+                        <Card.Title>Próximo Partido</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">Córdoba</Card.Subtitle>
+                        <Card.Text><h3>14/11/2023</h3></Card.Text>                                    
+                    </Card.Body>
+                </Card>
+            </div>
+        </div>
+    </div>
+</ProtectedElement>
+
         </div>
         </> : <></>
     )
