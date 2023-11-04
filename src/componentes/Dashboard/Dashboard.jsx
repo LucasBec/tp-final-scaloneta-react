@@ -3,20 +3,18 @@ import { useContext, useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';
 import { UserContext } from '../UserContext/UserContext';
 import { ProtectedElement } from '../ProtectedElement/ProtectedElement';
-
 import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 
 import './Dashboard.css'
-
+import "../Login/Login.css"
 const Dashboard = () => {
     const baseURL = 'http://localhost:3005';
     const navigate = useNavigate();
     const { userData, setUserData } = useContext(UserContext);
     const [estadistica, setEstadistica ] = useState(String);
-
-    
+    const jugadorPelota = require('./pateando una pelota.png');
     useEffect(()=>{
         // busco la info estadistica unicamente cuando sea presidente
         if(userData.user.tipoUsuario === 0){
@@ -76,7 +74,7 @@ const Dashboard = () => {
                     <div className='container mt-5'>
                         <div className="row justify-content-center">
                             <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
-                                <Card bg='success'>
+                                <Card>
                                     <Card.Body>
                                         <Card.Title>Futbolistas Creados</Card.Title>
                                         <Card.Subtitle className="mb-2 text-muted">Activos</Card.Subtitle>
@@ -85,7 +83,7 @@ const Dashboard = () => {
                                 </Card>
                             </div>
                             <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
-                                <Card bg='info'>
+                                <Card>
                                     <Card.Body>
                                         <Card.Title>Convocatorias</Card.Title>
                                         <Card.Subtitle className="mb-2 text-muted">Con 26 convocados</Card.Subtitle>
@@ -94,13 +92,20 @@ const Dashboard = () => {
                                 </Card>
                             </div>
                             <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
-                                <Card bg='info'>
-                                    <Card.Body>
-                                        <Card.Title>Próximo Partido</Card.Title>
-                                        <Card.Subtitle className="mb-2 text-muted">Córdoba</Card.Subtitle>
-                                        <Card.Text><h3>{(estadistica.fechaProximoPartido)}</h3></Card.Text>                                       
-                                    </Card.Body>
-                                </Card>
+                            <Card className="custom-card">
+                            <Card.Body>
+                                <Card.Title>Próximo Partido</Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted">Córdoba</Card.Subtitle>
+                                <Card.Text>
+                                    <h3 className="black-text">{(estadistica.fechaProximoPartido)}</h3>
+                                </Card.Text>                                       
+                            </Card.Body>
+                             </Card>
+                                
+                                <div>
+                                    <img src={jugadorPelota} alt="Jugador pateando una pelota" className="jugador-pelota-img" />
+                                </div>
+                    
                             </div>
                         </div>
                     </div>

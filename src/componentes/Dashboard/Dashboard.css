@@ -13,3 +13,24 @@
     color: rgba(222, 222, 222, 0.956);
 }
 
+
+.jugador-pelota-img {
+    justify-content: center;
+    margin-left: -200%;
+    opacity: 0; /* Comienza con una opacidad de 0 para la animación de entrada */
+    animation: fadeIn 1s ease-in-out forwards; /* forwards mantiene los estilos finales de la animación */
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px); /* Otra animación posible: desplazamiento hacia arriba */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
