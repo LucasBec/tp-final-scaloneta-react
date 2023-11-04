@@ -7,9 +7,9 @@
 
 }
 
-.dashboardH3{
-    margin: 15px;
-    background: linear-gradient(to right,#5200521b, #8b008bb7, #52005257) !important;
+.dashboardH2{
+    margin: 8%;
+    background: linear-gradient(to right,#52005212, #8b008b65, #52005235) !important;
     color: rgba(222, 222, 222, 0.956);
 }
 
