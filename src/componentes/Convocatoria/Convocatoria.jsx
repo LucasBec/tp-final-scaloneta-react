@@ -28,9 +28,24 @@ export function Convocatoria() {
 
     // objeto para almacenar la informacion de la convocatoria
     const [convocatoria, setConvocatoria] = useState({fecha:'',rival:'', golesRecibidos:'', golesConvertidos:''});
-    
-    
-    
+
+    const [showResultadoModal, setShowResultadoModal] = useState(false);
+    const [golesConvertidos, setGolesConvertidos] = useState(0);
+    const [golesRecibidos, setGolesRecibidos] = useState(0);
+    const [rivalSeleccionado, setRivalSeleccionado] = useState(null);
+    const [ResultadoConvocatoriaId, setConvocatoriaId] = useState(null);
+
+    const verResultadoModal = (idConvocatoria, rival) => {
+        setConvocatoriaId(idConvocatoria);
+        setRivalSeleccionado(rival);
+        setShowResultadoModal(true);
+      };
+
+    const cerrarResultadoModal = () => {
+        setShowResultadoModal(false);
+    };
+
+
     useEffect(()=>{
         buscarConvocatorias();
     },[]);
@@ -89,8 +104,37 @@ export function Convocatoria() {
         navigate(`/privado/convocados/${idConvocatoria}/${rival}`);        
     };
 
-    const resultado = (idConvocatoria, rival) => {
-        navigate(`/privado/resultado/${idConvocatoria}/${rival}`);
+    const guardarResultado = () => {
+        const resultado = {
+            golesConvertidos: golesConvertidos,
+            golesRecibidos: golesRecibidos,
+        };
+
+        // Envía los resultados al servidor
+        axios
+            .put(baseURL + `/api/v1/convocatoria/convocatorias/${ResultadoConvocatoriaId}`, resultado, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((res) => {
+                if (res.data.estado === 'OK') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Resultado guardado',
+                        text: 'El resultado se ha guardado exitosamente.',
+                    });
+                    cerrarResultadoModal(); // Cierra el modal de resultados
+                }
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ha ocurrido un error al guardar el resultado. Por favor, inténtalo de nuevo más tarde.',
+                });
+                console.log(error);
+            });
     };
     
     const crearConvocatoria = async(e)=>{
@@ -157,9 +201,19 @@ export function Convocatoria() {
                                         <td>{formatoFecha(item.fecha)}</td>
                                         <td>{item.nombre}</td>
                                         <td>
-                                        <Button variant="secondary" className='miBoton' onClick={() => convocar(item.idConvocatoria, formatoFecha(item.fecha))}>Convocar</Button>
-                                            <Button variant="success" className='miBoton' onClick={() => convocados(item.idConvocatoria, item.nombre)}>Convocados</Button>
-                                            <Button variant="info" className='miBoton' onClick={() => resultado(item.idConvocatoria)}>Resultado</Button>                                            
+                                        <Button variant="secondary" className='miBoton'
+                                         onClick={() => convocar(item.idConvocatoria, formatoFecha(item.fecha))}>Convocar</Button>
+
+                                        <Button variant="success" className='miBoton'
+                                         onClick={() => convocados(item.idConvocatoria, item.nombre)}>Convocados</Button>
+                                         
+                                        <Button
+                                            variant="info"
+                                            className='miBoton'
+                                            onClick={() => verResultadoModal(item.idConvocatoria, item.nombre)}
+                                        >
+                                            Resultado
+                                        </Button>
                                         </td>
                                     </tr>
                                 ))) 
@@ -234,7 +288,7 @@ export function Convocatoria() {
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={e => crearConvocatoria(e)}>
-                        <div className='row'>
+                        <div className='row modalConv'>
                             <div className="col-md-4">
                                 <Form.Group className="mb-3" controlId="formBasicFecha">
                                     <Form.Label>Fecha</Form.Label>
@@ -261,6 +315,42 @@ export function Convocatoria() {
                         <Button variant="primary" type="submit">Guardar</Button>
                     </Form>
                 </Modal.Body>
+            </Modal>
+
+            <Modal show={showResultadoModal} onHide={cerrarResultadoModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Resultado Convocatoria ID: {ResultadoConvocatoriaId}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                    <Form.Group controlId="golesConvertidos">
+                            <Form.Label>Argentina</Form.Label>
+                            <Form.Control
+                                type="number"
+                                placeholder="Goles convertidos"
+                                value={golesConvertidos}
+                                onChange={(e) => setGolesConvertidos(parseInt(e.target.value, 10))}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="golesRecibidos">
+                            <Form.Label>{rivalSeleccionado}</Form.Label>
+                            <Form.Control
+                                type="number"
+                                placeholder="Goles recibidos"
+                                value={golesRecibidos}
+                                onChange={(e) => setGolesRecibidos(parseInt(e.target.value, 10))}
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={cerrarResultadoModal}>
+                        Cerrar
+                    </Button>
+                    <Button variant="primary" onClick={guardarResultado}>
+                        Guardar Resultado
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </>
     );

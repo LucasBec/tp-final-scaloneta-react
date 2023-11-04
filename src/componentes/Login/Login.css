@@ -1,8 +1,9 @@
 .login-container {
+  margin-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;
+  max-height: 500px;
 }
 
 .login-form {
@@ -12,7 +13,9 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.495);
   text-align: center;
-  max-width: 22%;
+  max-width: 400px;
+  max-height: 400px;
+  height: 100%;
   width: 100%;
 }
 

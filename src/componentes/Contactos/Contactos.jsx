@@ -5,6 +5,8 @@ import axios from "axios";
 //clases bootstrap
 import { Form, Button, Card, Table} from "react-bootstrap" ;
 
+import Swal from 'sweetalert2';
+
 // importar css
 import "./Contactos.css"
 
@@ -24,17 +26,22 @@ export function Contactos (){
 
 		// argumentos: direccion del servidor, datos enviados al servidor
         axios.post(baseURL,formulario)
-        .then( res => {
-            console.log(res);
-            alert(res.data.respuesta);
-            setFormulario({nombre:'', correo:'', mensaje:''});
+        .then(res=> {{
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Consulta Enviada',
+                    text: res.data.respuesta,
+                });
+                console.log(res);
+                setFormulario({ nombre: '', correo:'', mensaje:''});
+            }
         })
         .catch( error=> {
             console.log('error ', error);
         });
 
     }
-
+    
     return(
         <>
             <div className="container mt-5">

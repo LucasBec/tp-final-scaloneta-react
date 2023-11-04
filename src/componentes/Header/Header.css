@@ -39,7 +39,7 @@
 
 .navbar-collapse {
   background-color: rgb(211, 181, 15);
-  z-index: 9999;
+  z-index: 1000;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   
