@@ -11,10 +11,10 @@ import axios from 'axios';
 import './Dashboard.css'
 
 const Dashboard = () => {
-    const baseURL = 'http://localhost:3010';
+    const baseURL = 'http://localhost:3005';
     const navigate = useNavigate();
     const { userData, setUserData } = useContext(UserContext);
-    const [estadistica, setEstadistica ] = useState(null);
+    const [estadistica, setEstadistica ] = useState(String);
 
     
     useEffect(()=>{
@@ -89,7 +89,7 @@ const Dashboard = () => {
                                     <Card.Body>
                                         <Card.Title>Convocatorias</Card.Title>
                                         <Card.Subtitle className="mb-2 text-muted">Con 26 convocados</Card.Subtitle>
-                                        {/* <Card.Text><h3>{(estadistica.convocatoria)}</h3></Card.Text>                                      */}
+                                        <Card.Text><h3>{(estadistica.convocatorias)}</h3></Card.Text>                                     
                                     </Card.Body>
                                 </Card>
                             </div>
@@ -98,7 +98,7 @@ const Dashboard = () => {
                                     <Card.Body>
                                         <Card.Title>Próximo Partido</Card.Title>
                                         <Card.Subtitle className="mb-2 text-muted">Córdoba</Card.Subtitle>
-                                        {/* <Card.Text><h3>{(estadistica.fechaProximoPartido)}</h3></Card.Text>                                        */}
+                                        <Card.Text><h3>{(estadistica.fechaProximoPartido)}</h3></Card.Text>                                       
                                     </Card.Body>
                                 </Card>
                             </div>
