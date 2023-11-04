@@ -56,7 +56,7 @@ function App() {
               </ProtectedRoute>
           }/>
 
-          <Route path='/privado/convocar/:parametro' 
+          <Route path='/privado/convocar/:parametro/:fechaParam' 
             element={
               <ProtectedRoute mustBeEntrenador={true}>
                 <Convocar/>

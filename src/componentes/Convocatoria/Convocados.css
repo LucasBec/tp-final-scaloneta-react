@@ -8,6 +8,11 @@
     overflow-y: auto; 
 }
 
+.tablaContainer{
+    max-height: 745px; 
+    overflow-y: auto; 
+}
+
 .miBoton{
     margin-right: 5px;
 }

@@ -405,8 +405,8 @@ export function Crud() {
       </div>
       
 
-      <div className='container mt-5 mb-5 miTabla'>
-        <Table striped bordered hover>
+      <div className='container mt-5 mb-5 tablaContainer'>
+        <Table striped bordered hover className='miTabla'>
           <thead>
             <tr>
               <th className='miThead'>Foto</th>

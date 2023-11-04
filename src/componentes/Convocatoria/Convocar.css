@@ -3,8 +3,13 @@
     color: white !important;
 }
 
-.miTabla{
-    max-height: 600px; 
+/* .miTabla{
+    height: 700px; 
+    
+} */
+
+.tablaContainer{
+    max-height: 745px; 
     overflow-y: auto; 
 }
 
@@ -15,4 +20,8 @@
 input {
     height: 30px;
     width: 30px;
+}
+
+h3 {
+    color: darkgrey;
 }

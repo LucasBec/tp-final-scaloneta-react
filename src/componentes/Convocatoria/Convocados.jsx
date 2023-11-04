@@ -40,20 +40,6 @@ export function Convocados(props) {
         });
     }
 
-/*     const titularizar = async (idFutbolista) => {
-        if (titulares.includes(idFutbolista)) {
-            // Si ya está seleccionada, quitarla de la lista de seleccionadas
-            setTitulares(titulares.filter((rowId) => rowId !== idFutbolista));
-        } else {
-            if(titulares.length === 11){
-                alert('ya hay 11 titulares seleccionados')
-                return;
-            }else{
-                setTitulares([...titulares, idFutbolista])
-            }
-        } 
-    }; */
-
     const titularizar = async (idFutbolista, dorsalValue) => {
         if (titulares.includes(idFutbolista)) {
             // Si ya está seleccionada, quitarla de la lista de seleccionadas
@@ -83,24 +69,13 @@ export function Convocados(props) {
     const cambiarDorsal = (index, dorsalValue) => {
         const nuevosDorsales = [...dorsales];
         nuevosDorsales[index] = dorsalValue;
-        setDorsales(nuevosDorsales);
-        console.log(nuevosDorsales)
+        if (parseInt(nuevosDorsales) > 99 || parseInt(nuevosDorsales) < 1){ //controla el numero de dorsal
+            alert('dorsal no puede ser mayor que 99 o menor que 1')
+            return;}
+        else {setDorsales(nuevosDorsales)
+            console.log(nuevosDorsales)}
       };
 
-/*     const titularizar = (idFutbolista, dorsalValue) => {
-        if (titulares.includes(idFutbolista)) {
-            setTitulares(titulares.filter((rowId) => rowId !== idFutbolista));
-        } else {
-            if (titulares.length === 11) {
-                alert('Ya hay 11 titulares seleccionados');
-                return;
-            } else {
-                setTitulares([...titulares, idFutbolista]);
-                // Actualiza el estado dorsal con el nuevo valor
-                setDorsal({ ...dorsal, [idFutbolista]: dorsalValue });
-            }
-        }
-    }; */
 
     const marcarCapitan = async (idFutbolista) => {
         // Verifica si el jugador ya está en la lista de titulares
@@ -119,19 +94,25 @@ export function Convocados(props) {
     const enviarEquipoTitular = () => {
         // Obtén los ID de los futbolistas titulares
         const futbolistasTitulares = titulares;
-
+    
         // Crea un objeto que incluya los ID de los futbolistas titulares y sus dorsales
         const equipoTitular = futbolistasTitulares.map((idFutbolista) => ({
             idFutbolista,
             dorsal: dorsales[convocados.findIndex((item) => item.idFutbolista === idFutbolista)]
         }));
-
-        const idCapitan = capitan[0]
-
+    
+        const idCapitan = capitan[0];
+    
+        // Verifica si hay dorsales vacíos en el equipoTitular
+        if (equipoTitular.some((jugador) => jugador.dorsal === '')) {
+            alert('No puedes enviar dorsales vacíos en el equipo titular');
+            return;
+        }
+    
         const data = { idConvocatoria, equipoTitular, idCapitan };
-
-        console.log('data: ', data)
-
+    
+        console.log('data: ', data);
+    
         // Envía los datos al servidor
         axios.put(baseURL + 'futbolistaConvocatoria/equipoTitular', data, {
             headers: {
@@ -146,7 +127,7 @@ export function Convocados(props) {
                     });
                     console.log('id conv: ', idConvocatoria);
                     console.log('Equipo Titular: ', equipoTitular);
-
+    
                     if (result.isConfirmed) {
                         navigate('/privado/convocatoria');
                     }
@@ -155,7 +136,6 @@ export function Convocados(props) {
             .catch((error) => {
                 console.log(error);
             });
-
     };
 
     const volver = () => {
@@ -179,8 +159,8 @@ export function Convocados(props) {
 
                 </div>
 
-                <div className='miTabla'>
-                    <Table striped bordered hover>
+                <div className='tablaContainer'>
+                    <Table striped bordered hover className='miTabla'>
                         <thead >
                             <tr>
                                 {/* <th className='miThead'>id</th> */}

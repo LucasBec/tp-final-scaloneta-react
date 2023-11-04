@@ -29,6 +29,11 @@
     
 }
 
+.tablaContainer{
+    max-height: 745px; 
+    overflow-y: auto; 
+}
+
 .miBotonEliminar, .miBotonEditar{
     margin: 5px;
 }

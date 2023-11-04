@@ -11,15 +11,13 @@ export function Convocar(props) {
     const { userData } = useContext(UserContext);
 
     // obtengo mi parametro id convocatoria
-    const { parametro } = useParams();
+    const { parametro, fechaParam } = useParams();
 
     const baseURL = 'http://localhost:3005/api/v1/';
 
     const [futbolistas, setFutbolistas] = useState([]);
     
     const [convocados, setConvocados] = useState([]);
-
-    const [fecha, setFecha] = useState([]);
 
     const navigate = useNavigate();
 
@@ -43,40 +41,55 @@ export function Convocar(props) {
         });
     }
 
-    // TAREA controlar que no se convoquen mas de 26 futbolistas
+    // Controla que no se convoquen más de 26 futbolistas
     const convocar = (idFutbolista) => {
         if (convocados.includes(idFutbolista)) {
             // Si ya está seleccionado, quito de la lista de convocados
             setConvocados(convocados.filter((rowId) => rowId !== idFutbolista));
         } else {
-            // Si no está seleccionada, agrego a la lista de convocados
-            setConvocados([...convocados, idFutbolista]);
-        }        
+            if (convocados.length >= 26) {
+                alert('No puedes convocar a más de 26 futbolistas.');
+            } else {
+                setConvocados([...convocados, idFutbolista]);
+            }
+        }
     }
 
-    // tiene el error de no controlar si seleccionó o no futbolistas
-    // tarea: corregir
-    const enviarInformacion = () => {    
-        
-        const lista ={ idConvocatoria:parametro, futbolistas:convocados, fecha:fecha}  
-        axios.post(baseURL + 'futbolistaConvocatoria/nueva', lista , { headers: {
-            'Authorization': `Bearer ${userData.token}`
-        }})
-        .then( async res => {           
-            if (res.data.estado === 'OK') {
-                const result = await Swal.fire({
-                    text: res.data.msj,
-                    icon:'success'})
+    const enviarInformacion = () => {
+    // Controla si no se han seleccionado futbolistas antes de enviar la información
+        if (convocados.length < 11) {
+            alert('Debes convocar al menos 11 futbolistas.');
+            return;
+        }
 
-                if (result.isConfirmed){
-                    navigate('/privado/convocatoria');
-                }    
+        const lista = {
+            idConvocatoria: parametro,
+            futbolistas: convocados,
+            fecha: fechaParam
+        };
+
+        axios.post(baseURL + 'futbolistaConvocatoria/nueva', lista, {
+            headers: {
+                'Authorization': `Bearer ${userData.token}`
             }
         })
-        .catch(error =>{
-            console.log(error);
-        });
+            .then(async res => {
+                if (res.data.estado === 'OK') {
+                    const result = await Swal.fire({
+                        text: res.data.msj,
+                        icon: 'success'
+                    });
 
+                    console.log('lista y fecha:', lista)
+
+                    if (result.isConfirmed) {
+                        navigate('/privado/convocatoria');
+                    }
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     const convocatoria = () => {        
@@ -88,7 +101,8 @@ export function Convocar(props) {
             <div className='container mt-3 mb-1 mb-5'>
                 <div className='row'>
                     <div className="col-md-10">
-                        <h1>Convocator Futbolistas</h1>
+                        <h1>Convocar Futbolistas</h1>
+                        <h3>{fechaParam}</h3>
                     </div>
                     <div className="col-md-1">
                         <Button variant="primary" onClick={enviarInformacion}>Convocar</Button>
@@ -99,15 +113,15 @@ export function Convocar(props) {
 
                 </div>
 
-                <div className='miTabla'>
-                    <Table striped bordered hover>
+                <div className='tablaContainer'>
+                    <Table striped bordered hover className='miTabla'>
                         <thead >
                             <tr>
                                 <th className='miThead'>Nombre</th>
                                 <th className='miThead'>Apellido</th>
                                 <th className='miThead'>Pie Habil</th>
                                 <th className='miThead'>Posición</th>
-                                <th className='miThead'>Convocar</th>
+                                <th className='miThead'>Convocar ({convocados.length})</th>
                             </tr>
                         </thead>
                         <tbody>

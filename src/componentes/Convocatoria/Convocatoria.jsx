@@ -33,7 +33,7 @@ export function Convocatoria() {
     
     useEffect(()=>{
         buscarConvocatorias();
-    },[]); 
+    },[]);
     
     const cerrarModal = () => setShowModal(false);
 
@@ -77,13 +77,12 @@ export function Convocatoria() {
         })
     }
 
-    const convocar = (id) => {
-        const parametro = id; 
-        navigate(`/privado/convocar/${parametro}`);        
+    const convocar = (id, fechaParam) => {
+        navigate(`/privado/convocar/${id}/${fechaParam}`);
     };
 
-    const dashboard = () => {        
-        navigate('/privado/dashboard');        
+    const dashboard = () => {
+        navigate('/privado/dashboard');
     };
 
     const convocados = (idConvocatoria, rival) => {
@@ -91,7 +90,7 @@ export function Convocatoria() {
     };
 
     const resultado = (idConvocatoria, rival) => {
-        navigate(`/privado/resultado/${idConvocatoria}/${rival}`);        
+        navigate(`/privado/resultado/${idConvocatoria}/${rival}`);
     };
     
     const crearConvocatoria = async(e)=>{
@@ -158,7 +157,7 @@ export function Convocatoria() {
                                         <td>{formatoFecha(item.fecha)}</td>
                                         <td>{item.nombre}</td>
                                         <td>
-                                            <Button variant="secondary" className='miBoton' onClick={() => convocar(item.idConvocatoria)}>Convocar</Button>
+                                        <Button variant="secondary" className='miBoton' onClick={() => convocar(item.idConvocatoria, formatoFecha(item.fecha))}>Convocar</Button>
                                             <Button variant="success" className='miBoton' onClick={() => convocados(item.idConvocatoria, item.nombre)}>Convocados</Button>
                                             <Button variant="info" className='miBoton' onClick={() => resultado(item.idConvocatoria)}>Resultado</Button>                                            
                                         </td>
