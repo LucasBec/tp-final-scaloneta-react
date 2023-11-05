@@ -29,9 +29,14 @@ const Dashboard = () => {
             headers:{
                 Authorization:`Bearer ${userData.token}` //necesario para la autenticacion del usuario en el api
             }
+
         })
         .then( resp => {
             setEstadistica(resp.data.dato);
+            console.log(estadistica)
+            console.log('total f',estadistica.totalFutbolistas)
+            console.log('fecha prox',estadistica.fechaProximaConvocatoria)
+
         })
         .catch( error => {
             console.log(error);
@@ -87,22 +92,24 @@ const Dashboard = () => {
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Convocatorias</Card.Title>
-                                        <Card.Subtitle className="mb-2 text-muted">Con 26 convocados</Card.Subtitle>
+                                        <Card.Subtitle className="mb-2 text-muted">Total</Card.Subtitle>
                                         <Card.Text><h3>{(estadistica.convocatorias)}</h3></Card.Text>                                     
                                     </Card.Body>
                                 </Card>
                             </div>
+                            
                             <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
                             <Card className="custom-card">
                             <Card.Body>
                                 <Card.Title>Próximo Partido</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">Córdoba</Card.Subtitle>
+                                <Card.Subtitle className="mb-2 text-muted">Fecha</Card.Subtitle>
                                 <Card.Text>
-                                    <h3 className="black-text">{(estadistica.fechaProximoPartido)}</h3>
+                                    <h3 className="black-text">{(estadistica.fechaProximaConvocatoria)}</h3>
                                 </Card.Text>                                       
                             </Card.Body>
                              </Card>
-                                
+
+                            
                                 <div>
                                     <img src={jugadorPelota} alt="Jugador pateando una pelota" className="jugador-pelota-img" />
                                 </div>
