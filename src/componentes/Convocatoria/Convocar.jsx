@@ -55,10 +55,24 @@ export function Convocar(props) {
         }
     }
 
+    // Verifica si se ha seleccionado al menos un arquero
+    const seSeleccionoArquero = () => {
+        return convocados.some(idFutbolista => {
+            const futbolista = futbolistas.find(f => f.idFutbolista === idFutbolista);
+            return futbolista && futbolista.posicion === 'Arquero';
+        });
+    }
+
     const enviarInformacion = () => {
     // Controla si no se han seleccionado futbolistas antes de enviar la información
         if (convocados.length < 11) {
             alert('Debes convocar al menos 11 futbolistas.');
+            return;
+        }
+
+        // Verifica si se ha seleccionado al menos un arquero
+        if (!seSeleccionoArquero()) {
+            alert('Debes seleccionar al menos un arquero en la convocatoria.');
             return;
         }
 

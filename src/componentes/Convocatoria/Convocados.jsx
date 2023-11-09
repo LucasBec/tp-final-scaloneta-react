@@ -17,6 +17,7 @@ export function Convocados(props) {
     const [titulares, setTitulares] = useState([]);
     const [capitan, setCapitan] = useState([]);
     const [dorsales, setDorsales] = useState([]);
+    const [arqueros, setArqueros] = useState([]);
 
 
     useEffect(()=>{
@@ -26,14 +27,20 @@ export function Convocados(props) {
     const buscarConvocados = async () => {
         axios.get(baseURL + 'futbolistaConvocatoria/futbolistaConvocatoria/' + idConvocatoria, {
             headers: {
-              'Authorization': `Bearer ${userData.token}`
+                'Authorization': `Bearer ${userData.token}`
             }
-          })
-        .then( res => {     
-            // tarea agregar control
-            setConvocados(res.data.dato);
-            // Inicializamos los dorsales con valores por defecto
-            setDorsales(Array(res.data.dato.length).fill(''));
+        })
+        .then( res => {
+            const futbolistas = res.data.dato;
+    
+            // Filtrar a los arqueros (asumiendo que 0 es la posición del arquero)
+            const arqueros = futbolistas.filter((futbolista) => futbolista.posicion === 'Arquero');
+    
+            // Actualiza las listas
+            setConvocados(futbolistas);
+            setArqueros(arqueros);
+            setDorsales(Array(futbolistas.length).fill(''));
+            console.log('arqueros:', arqueros)
         })
         .catch(error =>{
             console.log(error);
@@ -94,6 +101,18 @@ export function Convocados(props) {
     const enviarEquipoTitular = () => {
         // Obtén los ID de los futbolistas titulares
         const futbolistasTitulares = titulares;
+
+        // Verifica que haya exactamente un arquero en el equipo titular
+        const arqueros = futbolistasTitulares.filter((idFutbolista) => {
+            const index = convocados.findIndex((item) => item.idFutbolista === idFutbolista);
+            return convocados[index].posicion === 'Arquero'; // 0 es la posición de arquero
+        });
+
+        if (arqueros.length !== 1) {
+            console.log('arqueros: ', arqueros)
+            alert('Debes seleccionar exactamente un arquero en el equipo titular');
+            return;
+        }
     
         // Crea un objeto que incluya los ID de los futbolistas titulares y sus dorsales
         const equipoTitular = futbolistasTitulares.map((idFutbolista) => ({
@@ -108,6 +127,12 @@ export function Convocados(props) {
             alert('No puedes enviar dorsales vacíos en el equipo titular');
             return;
         }
+
+        else
+            if (equipoTitular.length < 11){
+                alert('el equipo titular debe tener al menos 11 futbolistas');
+                return;
+            }
     
         const data = { idConvocatoria, equipoTitular, idCapitan };
     

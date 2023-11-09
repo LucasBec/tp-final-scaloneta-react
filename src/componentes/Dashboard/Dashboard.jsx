@@ -105,7 +105,7 @@ const Dashboard = () => {
                                 <Card.Subtitle className="mb-2 text-muted">Fecha</Card.Subtitle>
                                 <Card.Text>
                                     <h3 className="black-text">{(estadistica.fechaProximaConvocatoria)}</h3>
-                                </Card.Text>                                       
+                                </Card.Text>
                             </Card.Body>
                              </Card>
 
